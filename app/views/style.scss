@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   padding: 0;
   margin: 0;
@@ -9,5 +13,28 @@ html, body {
 body {
   background: #70e1f5;
   background: linear-gradient(to bottom, #70e1f5, #ffd194);
+  background-attachment: fixed;
   text-align: center;
+  zoom: 150%;
+}
+
+#agua {
+  padding-top: 20%;
+}
+
+.main {
+  > div {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+input {
+  background: none;
+  border: none;
+  border-bottom: 2px solid white;
+  line-height: 24px;
+  color: white;
+  border-radius: 0;
+  width: 100%;
 }

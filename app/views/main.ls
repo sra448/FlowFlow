@@ -1,8 +1,9 @@
 { create-element, DOM } = require \react
-{ div, h1 } = DOM
+{ div, h1, input } = DOM
 
 require "./style.scss"
 
 module.exports = ->
   div { class-name: "main" },
-    h1 {}, "make app here"
+    div {},
+      input { type: "text", value: "Suche" }
