@@ -6,6 +6,7 @@ detail-ui = require "./detail.ls"
 
 require "./style.scss"
 
+
 module.exports = ->
   div { class-name: "main" },
     create-element search-ui, {}

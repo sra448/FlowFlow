@@ -1,6 +1,8 @@
 { connect } = require \react-redux
 { create-element, DOM } = require \react
-{ div, h1, input, ul, li } = DOM
+{ div, h1, input, ul, li, img } = DOM
+
+search-icon = require "./icons/search.svg"
 
 
 map-state-to-props = ({ search-text, search-results }) ->
@@ -16,8 +18,10 @@ map-dispatch-to-props = (dispatch) ->
 module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
     ({ search-text, search-results, on-change, on-select-station }) ->
-      div {},
-        input { on-change, type: "text", value: search-text }
+      div { class-name: "search" },
+        div {},
+          input { on-change, type: "text", value: search-text }
+          img { src: search-icon }
         ul {},
           for { id, name } in search-results
             li { on-click: on-select-station id }, name

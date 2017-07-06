@@ -1,6 +1,12 @@
 { connect } = require \react-redux
 { create-element, DOM } = require \react
-{ div, a } = DOM
+{ div, a, b, img } = DOM
+
+back-icon = require "./icons/back.svg"
+drain-icon = require "./icons/drain.svg"
+level-icon = require "./icons/level.svg"
+temperatur-icon = require "./icons/temperatur.svg"
+wheater-icon = require "./icons/wheater.svg"
 
 
 map-state-to-props = ({ selected-station }) ->
@@ -18,5 +24,30 @@ module.exports = do
         div {}
       else
         div { class-name: "detail" },
-          a { on-click: on-back }, "back"
-          selected-station
+          div {},
+            a { on-click: on-back },
+              img { src: back-icon }
+            selected-station
+
+          div { class-name: "infobox" },
+            b {}, "123"
+            div {},
+              img { src: drain-icon }
+              "Abfluss"
+
+          div { class-name: "infobox" },
+            b {}, "123"
+            div {},
+              img { src: level-icon }
+              "Wasserstand"
+
+          div { class-name: "infobox" },
+            b {}, "123"
+            div {},
+              img { src: temperatur-icon }
+              "Temparatur"
+
+          div {},
+            div {}, "Stand, 07. Juli 2017"
+            div {},
+              img { src: wheater-icon }
