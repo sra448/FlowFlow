@@ -17,6 +17,10 @@ map-dispatch-to-props = (dispatch) ->
     dispatch { type: \UNSELECT_STATION }
 
 
+random-between = (a, b) ->
+  Math.floor (Math.random() * (b - a)) + a
+
+
 module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
     ({ selected-station, on-back }) ->
@@ -30,19 +34,19 @@ module.exports = do
             selected-station
 
           div { class-name: "infobox" },
-            b {}, "123"
+            b {}, random-between 80, 120
             div {},
               img { src: drain-icon }
               "Abfluss"
 
           div { class-name: "infobox" },
-            b {}, "560"
+            b {}, random-between 300, 1700
             div {},
               img { src: level-icon }
               "Wasserstand"
 
           div { class-name: "infobox" },
-            b {}, "18"
+            b {}, random-between 16, 29
             div {},
               img { src: temperatur-icon }
               "Temparatur"
@@ -50,4 +54,5 @@ module.exports = do
           div { class-name: "footer" },
             div {}, "Stand, 07. Juli 2017"
             div {},
-              img { src: wheater-icon }
+              a { href: "http://www.meteo.ch/" },
+                img { src: wheater-icon }
