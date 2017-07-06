@@ -24,7 +24,7 @@ module.exports = do
         div {}
       else
         div { class-name: "detail" },
-          div {},
+          div { class-name: "header" },
             a { on-click: on-back },
               img { src: back-icon }
             selected-station
@@ -36,18 +36,18 @@ module.exports = do
               "Abfluss"
 
           div { class-name: "infobox" },
-            b {}, "123"
+            b {}, "560"
             div {},
               img { src: level-icon }
               "Wasserstand"
 
           div { class-name: "infobox" },
-            b {}, "123"
+            b {}, "18"
             div {},
               img { src: temperatur-icon }
               "Temparatur"
 
-          div {},
+          div { class-name: "footer" },
             div {}, "Stand, 07. Juli 2017"
             div {},
               img { src: wheater-icon }

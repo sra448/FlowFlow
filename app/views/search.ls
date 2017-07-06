@@ -20,7 +20,7 @@ module.exports = do
     ({ search-text, search-results, on-change, on-select-station }) ->
       div { class-name: "search" },
         div {},
-          input { on-change, type: "text", value: search-text }
+          input { on-change, type: "text", value: search-text, auto-focus: true }
           img { src: search-icon }
         ul {},
           for { id, name } in search-results

@@ -23,7 +23,12 @@ select-station = (state, id) ->
 
 
 unselect-station = (state) ->
-  { ...state, selected-station: undefined }
+  {
+    ...state,
+    search-text: "",
+    search-results: [],
+    selected-station: undefined
+  }
 
 
 

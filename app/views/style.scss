@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 html, body {
@@ -12,29 +13,38 @@ html, body {
 }
 
 body {
-  background: #70e1f5;
-  background: linear-gradient(to bottom, #70e1f5, #ffd194);
+  background: #3a7bd5;
+  background: linear-gradient(to bottom, #01d1ff, #3a7bd5);
   background-attachment: fixed;
   text-align: center;
   zoom: 150%;
 }
 
-#agua {
-  padding-top: 20%;
-}
-
 .search {
-  width: 80%;
+  padding-top: 30px;
+  width: 70%;
   margin: auto;
   text-align: left;
+
+  > div {
+    position: relative;
+
+    > img {
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 20px;
+    }
+  }
 }
 
 input {
   width: 100%;
   background: none;
   border: none;
-  border-bottom: 1px solid white;
-  line-height: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, .6);
+  line-height: 33px;
+  font-size: 18px;
   color: white;
   border-radius: 0;
   outline: none;
@@ -46,20 +56,74 @@ ul {
 }
 
 li {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  font-size: 16px;
 }
 
 .detail {
+  padding-top: 30px;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background: blue;
+  text-align: left;
+
+  background: #3a7bd5;
+  background: linear-gradient(to bottom, #01d1ff, #3a7bd5);
+  background-attachment: fixed;
+
+  > .header {
+    padding-left: 20px;
+
+    img {
+      height: 22px;
+      padding-top: 4px;
+      margin-right: 10px;
+    }
+  }
 }
 
 .infobox {
+  display: flex;
   margin: 10px 0;
   padding: 20px;
   background: rgba(255,255,255, .2);
+
+  > b {
+    flex: 0 0 110px;
+    width: 60%;
+    font-weight: bold;
+    font-size: 48px;
+    text-align: right;
+  }
+
+  > div {
+    flex: 0 0;
+    display: flex;
+    padding: 0 20px;
+    flex-direction: column;
+    font-size: 11px;
+  }
+
+  img {
+    margin: 10px;
+  }
+}
+
+.footer {
+  display: flex;
+  font-size: 12px;
+  padding: 20px 0;
+
+  > div {
+    flex: 1 1;
+    text-align: right;
+    padding: 0 10px;
+    font-size: 12px;
+
+    > img {
+      height: 20px;
+    }
+  }
 }
