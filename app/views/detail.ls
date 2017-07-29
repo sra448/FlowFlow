@@ -1,6 +1,6 @@
 { connect } = require \react-redux
 { create-element, DOM } = require \react
-{ div, a, b, img, h1 } = DOM
+{ div, a, b, img, h1, strong } = DOM
 
 
 back-icon = require "./icons/back.svg"
@@ -25,11 +25,12 @@ random-between = (a, b) ->
 
 measurement-box = ({ measurementType, value, unit }) ->
   div { class-name: "infobox" },
-    measurementType
-    b {}, value
     div {},
-      img { src: drain-icon }
-      unit
+      b {}, value
+      div {},
+        img { src: drain-icon }
+        div {}, measurementType
+        div {}, unit
 
 
 module.exports = do
@@ -39,11 +40,13 @@ module.exports = do
         div {}
       else
         div { class-name: "detail" },
-          # h1 {}, "Waterbuddy"
+          h1 {}, "Waterbuddy"
+
           div { class-name: "header" },
             a { on-click: on-back },
               img { src: back-icon }
-            selected-station.name
+            strong {}, selected-station.waterBodyName
+            " - #{selected-station.name}"
 
           for m in selected-station.measurements
             measurement-box m
