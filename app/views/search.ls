@@ -1,7 +1,7 @@
 { repeat } = require \prelude-ls
 { connect } = require \react-redux
 { create-element, DOM } = require \react
-{ div, h1, input, ul, li, img, svg, path } = DOM
+{ div, h1, input, ul, li, img, svg, path, strong } = DOM
 
 search-icon = require "./icons/search.svg"
 
@@ -33,4 +33,6 @@ module.exports = do
           }
         ul {},
           for { id, name, water_body_name } in search-results
-            li { on-click: on-select-station id }, "#{water_body_name}, #{name}"
+            li { on-click: on-select-station id },
+              strong {}, water_body_name
+              " - #{name}"

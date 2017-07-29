@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
 }
 
 html, body {
@@ -23,7 +22,12 @@ h1 {
   margin: auto;
   margin-bottom: 20px;
   font-size: 14px;
+  font-weight: normal;
   letter-spacing: 0.2em;;
+}
+
+strong {
+  letter-spacing: 0.1em;
 }
 
 #agua, .main, .search {
