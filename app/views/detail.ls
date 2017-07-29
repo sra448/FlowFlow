@@ -23,8 +23,9 @@ random-between = (a, b) ->
   Math.floor (Math.random() * (b - a)) + a
 
 
-measurement-box = ({ title, value, unit }) ->
+measurement-box = ({ measurementType, value, unit }) ->
   div { class-name: "infobox" },
+    measurementType
     b {}, value
     div {},
       img { src: drain-icon }

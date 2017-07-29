@@ -23,5 +23,5 @@ module.exports = do
           input { on-change, type: "text", value: search-text, auto-focus: true }
           img { src: search-icon }
         ul {},
-          for { id, name, water-body-name } in search-results
-            li { on-click: on-select-station id }, "#{water-body-name}, #{name}"
+          for { id, name, water_body_name } in search-results
+            li { on-click: on-select-station id }, "#{water_body_name}, #{name}"

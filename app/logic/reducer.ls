@@ -14,7 +14,7 @@ stations-fuse = { search: -> [] }
 
 
 load-stations = (state, stations) ->
-  stations-fuse := new Fuse stations, { keys: ["name", "water-body-name"], id: "id", distance: 1 }
+  stations-fuse := new Fuse stations, { keys: ["name", "water_body_name"], id: "id", distance: 1 }
   { ...state, stations }
 
 
@@ -34,7 +34,7 @@ select-station = (state, id) ->
     ...state
     selected-station: {
       name: station.name
-      water-body-name: station.water-body-name
+      water-body-name: station.water_body_name
       measurements: state.measurements[id]
     }
   }
