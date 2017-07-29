@@ -17,12 +17,24 @@ body {
   background: linear-gradient(to bottom, #01d1ff, #3a7bd5);
   background-attachment: fixed;
   text-align: center;
-  zoom: 150%;
+}
+
+h1 {
+  margin: auto;
+  margin-bottom: 20px;
+  font-size: 14px;
+  letter-spacing: 0.2em;;
+}
+
+#agua, .main, .search {
+  height: 100%;
 }
 
 .search {
-  padding-top: 30px;
-  width: 70%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 0 10px;
+  width: 76%;
   margin: auto;
   text-align: left;
 
@@ -36,13 +48,17 @@ body {
       height: 20px;
     }
   }
+
+  > ul {
+    flex: 1 1;
+    overflow: scroll;
+  }
 }
 
 input {
   width: 100%;
   background: none;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, .6);
   line-height: 33px;
   font-size: 18px;
   color: white;
@@ -56,8 +72,8 @@ ul {
 }
 
 li {
-  padding-bottom: 10px;
-  font-size: 16px;
+  padding-bottom: 20px;
+  font-size: 18px;
 }
 
 .detail {
