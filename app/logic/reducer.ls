@@ -10,12 +10,21 @@ initial-state = do
   selected-station: undefined
 
 
-stations-fuse = { search: -> [] }
-
-
 load-stations = (state, stations) ->
-  stations-fuse := new Fuse stations, { keys: ["name", "water_body_name"], id: "id", distance: 1 }
+  reset-fuzzy-searcher stations
   { ...state, stations }
+
+
+stations-searcher = { search: -> [] }
+reset-fuzzy-searcher = (stations) ->
+  stations-searcher := new Fuse stations, {
+    keys: ["name", "water_body_name"]
+    id: "id"
+    distance: 0
+    findAllMatches: true
+    shouldSort: true
+    threshold: 0.3
+  }
 
 
 load-measurements = (state, measurements) ->
@@ -23,7 +32,7 @@ load-measurements = (state, measurements) ->
 
 
 change-search-text = (state, search-text) ->
-  ids = stations-fuse.search search-text
+  ids = stations-searcher.search search-text
   search-results = state.stations.filter (s) -> s.id in ids
   { ...state, search-text, search-results }
 
