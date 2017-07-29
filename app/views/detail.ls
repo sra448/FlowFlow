@@ -1,6 +1,6 @@
 { connect } = require \react-redux
 { create-element, DOM } = require \react
-{ div, a, b, img } = DOM
+{ div, a, b, img, h1 } = DOM
 
 
 back-icon = require "./icons/back.svg"
@@ -39,6 +39,7 @@ module.exports = do
         div {}
       else
         div { class-name: "detail" },
+          # h1 {}, "Waterbuddy"
           div { class-name: "header" },
             a { on-click: on-back },
               img { src: back-icon }
