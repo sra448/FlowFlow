@@ -1,11 +1,11 @@
 * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 html, body {
-  padding: 0;
-  margin: 0;
   height: 100%;
   width: 100%;
   color: white;
@@ -22,7 +22,7 @@ h1 {
   margin: auto;
   margin-top: 8px;
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
   letter-spacing: 0.2em;;
 }
@@ -38,7 +38,7 @@ strong {
 .search {
   display: flex;
   flex-direction: column;
-  text-align: left;
+  width: 100%;
 
   input {
     width: 100%;
@@ -69,10 +69,10 @@ strong {
 
   > ul {
     flex: 1 1;
-    margin: 0;
-    overflow: scroll;
     list-style-type: none;
-    padding: 0;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    text-align: left;
   }
 
   li {
@@ -82,7 +82,6 @@ strong {
 }
 
 .detail {
-  padding-top: 10px;
   position: fixed;
   top: 0;
   right: 0;
@@ -94,15 +93,22 @@ strong {
   background-attachment: fixed;
 
   > .header {
-    width: 76%;
-    margin: auto;
+    position: relative;
     margin-bottom: 20px;
-    text-align: left;
     font-size: 18px;
+    font-size: 22px;
 
-    img {
+    a {
+      position: absolute;
+      width: 22px;
       height: 22px;
-      margin-right: 10px;
+      top: 2px;
+      left: 30px;
+
+      img {
+        height: 22px;
+        width: 22px;
+      }
     }
   }
 }
@@ -110,7 +116,7 @@ strong {
 .infobox {
   display: flex;
   margin: 16px 0;
-  background: rgba(255,255,255, .2);
+  background: rgba(58, 123, 213, 0.31);
 
   > div {
     width: 76%;
@@ -135,21 +141,5 @@ strong {
 
   img {
     margin: 10px;
-  }
-}
-
-.footer {
-  display: flex;
-  font-size: 12px;
-
-  > div {
-    flex: 1 1;
-    text-align: right;
-    padding: 0 10px;
-    font-size: 12px;
-
-    > img {
-      height: 20px;
-    }
   }
 }

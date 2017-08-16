@@ -45,8 +45,8 @@ module.exports = do
           div { class-name: "header" },
             a { on-click: on-back },
               img { src: back-icon }
-            strong {}, selected-station.waterBodyName
-            " - #{selected-station.name}"
+            div {}, selected-station.waterBodyName
+            div {}, selected-station.name
 
           for m in selected-station.measurements
             measurement-box m
