@@ -16,23 +16,27 @@ map-dispatch-to-props = (dispatch) ->
     dispatch { type: \SELECT_STATION, id }
 
 
+wavey-line = ->
+  svg { height: 18, width: "100%" },
+    path {
+      d: "M 0 4 #{repeat 24, "q 4 -4 8 0 q 4 4 8 0" }"
+      stroke: "white"
+      stroke-width: "1"
+      fill: "transparent"
+    }
+
+
 module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
     ({ search-text, search-results, on-change, on-select-station }) ->
       div { class-name: "search" },
         h1 {}, "Waterbuddy"
-        div {},
-          input { on-change, type: "text", value: search-text, auto-focus: true }
-          img { src: search-icon }
-        svg { height: 18, width: "100%" },
-          path {
-            d: "M 0 4 #{repeat 24, "q 4 -4 8 0 q 4 4 8 0" }"
-            stroke: "white"
-            stroke-width: "1"
-            fill: "transparent"
-          }
+        div { class-name: "textbox" },
+          div {},
+            input { on-change, type: "text", value: search-text, auto-focus: true }
+            img { src: search-icon }
+          wavey-line {}
         ul {},
           for { id, name, water_body_name } in search-results
             li { on-click: on-select-station id },
-              strong {}, water_body_name
-              " - #{name}"
+              "#{water_body_name}, #{name}"
