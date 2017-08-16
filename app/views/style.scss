@@ -20,7 +20,8 @@ body {
 
 h1 {
   margin: auto;
-  margin-bottom: 20px;
+  margin-top: 8px;
+  margin-bottom: 8px;
   font-size: 14px;
   font-weight: normal;
   letter-spacing: 0.2em;;
@@ -37,47 +38,47 @@ strong {
 .search {
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 0 10px;
-  width: 76%;
-  margin: auto;
   text-align: left;
 
-  > div {
-    position: relative;
+  input {
+    width: 100%;
+    background: none;
+    border: none;
+    line-height: 33px;
+    font-size: 18px;
+    color: white;
+    border-radius: 0;
+    outline: none;
+  }
 
-    > img {
+  .textbox {
+    position: relative;
+    padding: 0 20px;
+
+    div {
+      padding: 0 10px;
+    }
+
+    img {
       position: absolute;
-      right: 0;
-      top: 20%;
+      right: 30px;
+      top: 6px;
       height: 20px;
     }
   }
 
   > ul {
     flex: 1 1;
+    margin: 0;
     overflow: scroll;
+    list-style-type: none;
+    padding: 0;
   }
-}
 
-input {
-  width: 100%;
-  background: none;
-  border: none;
-  line-height: 33px;
-  font-size: 18px;
-  color: white;
-  border-radius: 0;
-  outline: none;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  padding-bottom: 20px;
-  font-size: 18px;
+  li {
+    padding: 8px 0 8px 30px;
+    font-size: 18px;
+  }
 }
 
 .detail {
