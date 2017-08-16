@@ -12442,7 +12442,7 @@ exports = module.exports = __webpack_require__(103)(undefined);
 
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box;\n  font-family: 'Roboto', sans-serif; }\n\nhtml, body {\n  padding: 0;\n  margin: 0;\n  height: 100%;\n  width: 100%;\n  color: white; }\n\nbody {\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #01d1ff, #3a7bd5);\n  background-attachment: fixed;\n  text-align: center; }\n\nh1 {\n  margin: auto;\n  margin-bottom: 20px;\n  font-size: 14px;\n  font-weight: normal;\n  letter-spacing: 0.2em; }\n\nstrong {\n  letter-spacing: 0.1em; }\n\n#agua, .main, .search {\n  height: 100%; }\n\n.search {\n  display: flex;\n  flex-direction: column;\n  padding: 10px 10px 0 10px;\n  width: 76%;\n  margin: auto;\n  text-align: left; }\n  .search > div {\n    position: relative; }\n    .search > div > img {\n      position: absolute;\n      right: 0;\n      top: 20%;\n      height: 20px; }\n  .search > ul {\n    flex: 1 1;\n    overflow: scroll; }\n\ninput {\n  width: 100%;\n  background: none;\n  border: none;\n  line-height: 33px;\n  font-size: 18px;\n  color: white;\n  border-radius: 0;\n  outline: none; }\n\nul {\n  list-style-type: none;\n  padding: 0; }\n\nli {\n  padding-bottom: 20px;\n  font-size: 18px; }\n\n.detail {\n  padding-top: 10px;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #01d1ff, #3a7bd5);\n  background-attachment: fixed; }\n  .detail > .header {\n    width: 76%;\n    margin: auto;\n    margin-bottom: 20px;\n    text-align: left;\n    font-size: 18px; }\n    .detail > .header img {\n      height: 22px;\n      margin-right: 10px; }\n\n.infobox {\n  display: flex;\n  margin: 16px 0;\n  background: rgba(255, 255, 255, 0.2); }\n  .infobox > div {\n    width: 76%;\n    margin: auto;\n    padding: 20px 0;\n    display: flex; }\n    .infobox > div > b {\n      flex: 0 0 50%;\n      width: 60%;\n      font-weight: bold;\n      font-size: 62px;\n      text-align: right; }\n    .infobox > div > div {\n      flex: 1 1;\n      display: flex;\n      flex-direction: column; }\n  .infobox img {\n    margin: 10px; }\n\n.footer {\n  display: flex;\n  font-size: 12px; }\n  .footer > div {\n    flex: 1 1;\n    text-align: right;\n    padding: 0 10px;\n    font-size: 12px; }\n    .footer > div > img {\n      height: 20px; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box;\n  font-family: 'Roboto', sans-serif; }\n\nhtml, body {\n  padding: 0;\n  margin: 0;\n  height: 100%;\n  width: 100%;\n  color: white; }\n\nbody {\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #01d1ff, #3a7bd5);\n  background-attachment: fixed;\n  text-align: center; }\n\nh1 {\n  margin: auto;\n  margin-top: 8px;\n  margin-bottom: 8px;\n  font-size: 14px;\n  font-weight: normal;\n  letter-spacing: 0.2em; }\n\nstrong {\n  letter-spacing: 0.1em; }\n\n#agua, .main, .search {\n  height: 100%; }\n\n.search {\n  display: flex;\n  flex-direction: column;\n  text-align: left; }\n  .search input {\n    width: 100%;\n    background: none;\n    border: none;\n    line-height: 33px;\n    font-size: 18px;\n    color: white;\n    border-radius: 0;\n    outline: none; }\n  .search .textbox {\n    position: relative;\n    padding: 0 20px; }\n    .search .textbox div {\n      padding: 0 10px; }\n    .search .textbox img {\n      position: absolute;\n      right: 30px;\n      top: 6px;\n      height: 20px; }\n  .search > ul {\n    flex: 1 1;\n    margin: 0;\n    overflow: scroll;\n    list-style-type: none;\n    padding: 0; }\n  .search li {\n    padding: 8px 0 8px 30px;\n    font-size: 18px; }\n\n.detail {\n  padding-top: 10px;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #01d1ff, #3a7bd5);\n  background-attachment: fixed; }\n  .detail > .header {\n    width: 76%;\n    margin: auto;\n    margin-bottom: 20px;\n    text-align: left;\n    font-size: 18px; }\n    .detail > .header img {\n      height: 22px;\n      margin-right: 10px; }\n\n.infobox {\n  display: flex;\n  margin: 16px 0;\n  background: rgba(255, 255, 255, 0.2); }\n  .infobox > div {\n    width: 76%;\n    margin: auto;\n    padding: 20px 0;\n    display: flex; }\n    .infobox > div > b {\n      flex: 0 0 50%;\n      width: 60%;\n      font-weight: bold;\n      font-size: 62px;\n      text-align: right; }\n    .infobox > div > div {\n      flex: 1 1;\n      display: flex;\n      flex-direction: column; }\n  .infobox img {\n    margin: 10px; }\n\n.footer {\n  display: flex;\n  font-size: 12px; }\n  .footer > div {\n    flex: 1 1;\n    text-align: right;\n    padding: 0 10px;\n    font-size: 12px; }\n    .footer > div > img {\n      height: 20px; }\n", ""]);
 
 // exports
 
@@ -14496,7 +14496,7 @@ module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
 /* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var repeat, connect, ref$, createElement, DOM, div, h1, input, ul, li, img, svg, path, strong, searchIcon, mapStateToProps, mapDispatchToProps;
+var repeat, connect, ref$, createElement, DOM, div, h1, input, ul, li, img, svg, path, strong, searchIcon, mapStateToProps, mapDispatchToProps, waveyLine;
 repeat = __webpack_require__(59).repeat;
 connect = __webpack_require__(33).connect;
 ref$ = __webpack_require__(16), createElement = ref$.createElement, DOM = ref$.DOM;
@@ -14530,19 +14530,8 @@ mapDispatchToProps = function(dispatch){
     }
   };
 };
-module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
-  var searchText, searchResults, onChange, onSelectStation, id, name, water_body_name;
-  searchText = arg$.searchText, searchResults = arg$.searchResults, onChange = arg$.onChange, onSelectStation = arg$.onSelectStation;
-  return div({
-    className: "search"
-  }, h1({}, "Waterbuddy"), div({}, input({
-    onChange: onChange,
-    type: "text",
-    value: searchText,
-    autoFocus: true
-  }), img({
-    src: searchIcon
-  })), svg({
+waveyLine = function(){
+  return svg({
     height: 18,
     width: "100%"
   }, path({
@@ -14550,13 +14539,29 @@ module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
     stroke: "white",
     strokeWidth: "1",
     fill: "transparent"
-  })), ul({}, (function(){
+  }));
+};
+module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
+  var searchText, searchResults, onChange, onSelectStation, id, name, water_body_name;
+  searchText = arg$.searchText, searchResults = arg$.searchResults, onChange = arg$.onChange, onSelectStation = arg$.onSelectStation;
+  return div({
+    className: "search"
+  }, h1({}, "Waterbuddy"), div({
+    className: "textbox"
+  }, div({}, input({
+    onChange: onChange,
+    type: "text",
+    value: searchText,
+    autoFocus: true
+  }), img({
+    src: searchIcon
+  })), waveyLine({})), ul({}, (function(){
     var i$, ref$, len$, ref1$, results$ = [];
     for (i$ = 0, len$ = (ref$ = searchResults).length; i$ < len$; ++i$) {
       ref1$ = ref$[i$], id = ref1$.id, name = ref1$.name, water_body_name = ref1$.water_body_name;
       results$.push(li({
         onClick: onSelectStation(id)
-      }, strong({}, water_body_name), " - " + name));
+      }, water_body_name + ", " + name));
     }
     return results$;
   }())));
