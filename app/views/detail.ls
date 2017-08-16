@@ -41,7 +41,6 @@ module.exports = do
       else
         div { class-name: "detail" },
           h1 {}, "Waterbuddy"
-
           div { class-name: "header" },
             a { on-click: on-back },
               img { src: back-icon }
