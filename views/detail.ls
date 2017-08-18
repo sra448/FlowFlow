@@ -40,7 +40,6 @@ module.exports = do
         div {}
       else
         div { class-name: "detail" },
-          h1 {}, "FlowFlow"
           div { class-name: "header" },
             a { on-click: on-back },
               img { src: back-icon }
