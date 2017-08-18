@@ -30,7 +30,7 @@ module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
     ({ search-text, search-results, on-change, on-select-station }) ->
       div { class-name: "search" },
-        h1 {}, "Waterbuddy"
+        h1 {}, "FlowFlow"
         div { class-name: "textbox" },
           div {},
             input { on-change, type: "text", value: search-text, auto-focus: true }

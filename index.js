@@ -14448,7 +14448,7 @@ module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
   } else {
     return div({
       className: "detail"
-    }, h1({}, "Waterbuddy"), div({
+    }, h1({}, "FlowFlow"), div({
       className: "header"
     }, a({
       onClick: onBack
@@ -14521,7 +14521,7 @@ module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
   searchText = arg$.searchText, searchResults = arg$.searchResults, onChange = arg$.onChange, onSelectStation = arg$.onSelectStation;
   return div({
     className: "search"
-  }, h1({}, "Waterbuddy"), div({
+  }, h1({}, "FlowFlow"), div({
     className: "textbox"
   }, div({}, input({
     onChange: onChange,
