@@ -17,12 +17,12 @@ render app, document.get-element-by-id \agua
 
 # load data
 
-fetch "https://waterbuddy.herokuapp.com/api/stations"
+fetch "https://flowflow.ch/api/stations"
   .then (resp) -> resp.json()
   .then (stations) ->
     store.dispatch { type: \STATIONS_LOADED, stations }
 
-fetch "https://waterbuddy.herokuapp.com/api/measurements"
+fetch "https://flowflow.ch/api/measurements"
   .then (resp) -> resp.json()
   .then (measurements) ->
     store.dispatch { type: \MEASUREMENTS_LOADED, measurements }
