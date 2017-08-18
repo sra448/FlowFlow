@@ -6,10 +6,12 @@
 search-icon = require "./icons/search.svg"
 
 
-map-state-to-props = ({ search-text, search-results }) ->
-  { search-text, search-results }
+map-state-to-props = ({ search-text, search-results, input-has-focus }) ->
+  { search-text, search-results, input-has-focus }
 
 map-dispatch-to-props = (dispatch) ->
+  on-input-focus: ->
+    dispatch { type: \FOCUS_SEARCH_INPUT }
   on-change: ({ target }) ->
     dispatch { type: \CHANGE_SEARCH_TEXT, search-text: target.value }
   on-select-station: (id) -> ->
@@ -28,12 +30,12 @@ wavey-line = ->
 
 module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
-    ({ search-text, search-results, on-change, on-select-station }) ->
-      div { class-name: "search" },
+    ({ search-text, search-results, input-has-focus, on-change, on-select-station, on-input-focus }) ->
+      div { class-name: "search #{"input-has-focus" if input-has-focus}" },
         h1 {}, "FlowFlow"
         div { class-name: "textbox" },
           div {},
-            input { on-change, type: "text", value: search-text, auto-focus: true }
+            input { on-change, type: "text", value: search-text, on-focus: on-input-focus, placeholder: "Search" }
             img { src: search-icon }
           wavey-line {}
         ul {},
