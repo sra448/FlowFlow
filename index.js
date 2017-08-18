@@ -14378,7 +14378,7 @@ app = createElement(Provider, {
   store: store
 }, ui({}));
 render(app, document.getElementById('agua'));
-fetch("https://waterbuddy.herokuapp.com/api/stations").then(function(resp){
+fetch("https://flowflow.ch/api/stations").then(function(resp){
   return resp.json();
 }).then(function(stations){
   return store.dispatch({
@@ -14386,7 +14386,7 @@ fetch("https://waterbuddy.herokuapp.com/api/stations").then(function(resp){
     stations: stations
   });
 });
-fetch("https://waterbuddy.herokuapp.com/api/measurements").then(function(resp){
+fetch("https://flowflow.ch/api/measurements").then(function(resp){
   return resp.json();
 }).then(function(measurements){
   return store.dispatch({
