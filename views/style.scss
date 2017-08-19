@@ -24,6 +24,7 @@ h1 {
   margin-bottom: 30px;
   font-weight: 700;
   font-family: 'Lobster Two', cursive;
+  transition: all .1s ease-out;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -49,13 +50,12 @@ h1 {
   width: 100%;
   padding-top: 20px;
 
-  &.input-has-focus > .textbox {
+  &.condensed > .textbox {
     margin-top: -90px;
   }
 
-  &.input-has-focus > h1 {
+  &.condensed > h1 {
     opacity: 0;
-    transition: all .1s ease-out;
   }
 
   .textbox {

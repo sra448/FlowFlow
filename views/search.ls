@@ -10,8 +10,10 @@ map-state-to-props = ({ search-text, search-results, input-has-focus }) ->
   { search-text, search-results, input-has-focus }
 
 map-dispatch-to-props = (dispatch) ->
-  on-input-focus: ->
+  on-focus: ->
     dispatch { type: \FOCUS_SEARCH_INPUT }
+  on-blur: ->
+    dispatch { type: \BLUR_SEARCH_INPUT }
   on-change: ({ target }) ->
     dispatch { type: \CHANGE_SEARCH_TEXT, search-text: target.value }
   on-select-station: (id) -> ->
@@ -30,12 +32,15 @@ wavey-line = ->
 
 module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
-    ({ search-text, search-results, input-has-focus, on-change, on-select-station, on-input-focus }) ->
-      div { class-name: "search #{"input-has-focus" if input-has-focus}" },
+    ({ search-text, search-results, input-has-focus, on-change, on-select-station, on-focus, on-blur }) ->
+      show-as-condensed = input-has-focus || search-results.length > 0
+      console.log input-has-focus, search-results.length, input-has-focus || search-results.size > 0
+
+      div { class-name: "search #{"condensed" if show-as-condensed}" },
         h1 {}, "FlowFlow"
         div { class-name: "textbox" },
           div {},
-            input { on-change, type: "text", value: search-text, on-focus: on-input-focus, placeholder: "Search" }
+            input { on-focus, on-change, on-blur, type: "text", value: search-text, placeholder: "Search" }
             img { src: search-icon }
           wavey-line {}
         ul {},

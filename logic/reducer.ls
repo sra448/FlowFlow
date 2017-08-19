@@ -36,6 +36,10 @@ focus-search-input = (state) ->
   { ...state, input-has-focus: true }
 
 
+blur-search-input = (state) ->
+  { ...state, input-has-focus: false }
+
+
 change-search-text = (state, search-text) ->
   ids = stations-searcher.search search-text
   search-results = state.stations.filter (s) -> s.id in ids
@@ -70,6 +74,7 @@ module.exports = (state = initial-state, action) ->
     case \STATIONS_LOADED then load-stations state, action.stations
     case \MEASUREMENTS_LOADED then load-measurements state, action.measurements
     case \FOCUS_SEARCH_INPUT then focus-search-input state
+    case \BLUR_SEARCH_INPUT then blur-search-input state
     case \CHANGE_SEARCH_TEXT then change-search-text state, action.search-text
     case \SELECT_STATION then select-station state, action.id
     case \UNSELECT_STATION then unselect-station state
