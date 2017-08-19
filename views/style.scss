@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Lobster Two', cursive;
+  font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -22,8 +22,9 @@ h1 {
   margin: auto;
   margin-top: 25px;
   margin-bottom: 30px;
-  font-weight: 700;
   font-family: 'Lobster Two', cursive;
+  font-weight: bold;
+  font-size: 42px;
   transition: all .1s ease-out;
 }
 
