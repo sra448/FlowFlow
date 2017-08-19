@@ -11437,7 +11437,7 @@ module.exports = g;
 /* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Fuse, ref$, objToPairs, map, initialState, loadStations, stationsSearcher, resetFuzzySearcher, loadMeasurements, focusSearchInput, changeSearchText, selectStation, unselectStation;
+var Fuse, ref$, objToPairs, map, initialState, loadStations, stationsSearcher, resetFuzzySearcher, loadMeasurements, focusSearchInput, blurSearchInput, changeSearchText, selectStation, unselectStation;
 Fuse = __webpack_require__(118);
 ref$ = __webpack_require__(59), objToPairs = ref$.objToPairs, map = ref$.map;
 initialState = {
@@ -11476,6 +11476,10 @@ focusSearchInput = function(state){
   var ref$;
   return ref$ = {}, import$(ref$, state), ref$.inputHasFocus = true, ref$;
 };
+blurSearchInput = function(state){
+  var ref$;
+  return ref$ = {}, import$(ref$, state), ref$.inputHasFocus = false, ref$;
+};
 changeSearchText = function(state, searchText){
   var ids, searchResults, ref$;
   ids = stationsSearcher.search(searchText);
@@ -11509,6 +11513,8 @@ module.exports = function(state, action){
     return loadMeasurements(state, action.measurements);
   case 'FOCUS_SEARCH_INPUT':
     return focusSearchInput(state);
+  case 'BLUR_SEARCH_INPUT':
+    return blurSearchInput(state);
   case 'CHANGE_SEARCH_TEXT':
     return changeSearchText(state, action.searchText);
   case 'SELECT_STATION':
@@ -12449,7 +12455,7 @@ exports = module.exports = __webpack_require__(103)(undefined);
 
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box;\n  font-family: 'Roboto', sans-serif;\n  padding: 0;\n  margin: 0; }\n\nhtml, body {\n  height: 100%;\n  width: 100%;\n  color: white; }\n\nbody {\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);\n  background-attachment: fixed;\n  text-align: center; }\n\nh1 {\n  margin: auto;\n  margin-top: 25px;\n  margin-bottom: 30px;\n  font-weight: 700;\n  font-family: 'Lobster Two', cursive; }\n\n::-webkit-input-placeholder {\n  /* Chrome/Opera/Safari */\n  color: rgba(255, 255, 255, 0.6); }\n\n::-moz-placeholder {\n  /* Firefox 19+ */\n  color: rgba(255, 255, 255, 0.6); }\n\n:-ms-input-placeholder {\n  /* IE 10+ */\n  color: rgba(255, 255, 255, 0.6); }\n\n:-moz-placeholder {\n  /* Firefox 18- */\n  color: rgba(255, 255, 255, 0.6); }\n\n#agua, .main, .search {\n  height: 100%; }\n\n.search {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding-top: 20px; }\n  .search.input-has-focus > .textbox {\n    margin-top: -90px; }\n  .search.input-has-focus > h1 {\n    opacity: 0;\n    transition: all .1s ease-out; }\n  .search .textbox {\n    position: relative;\n    padding: 0 20px;\n    transition: all .3s ease-out; }\n    .search .textbox div {\n      padding: 0 10px; }\n    .search .textbox input {\n      width: 100%;\n      background: none;\n      border: none;\n      line-height: 33px;\n      font-size: 18px;\n      color: white;\n      border-radius: 0;\n      outline: none; }\n    .search .textbox img {\n      position: absolute;\n      right: 30px;\n      top: 6px;\n      height: 20px; }\n  .search > ul {\n    flex: 1 1;\n    list-style-type: none;\n    overflow: scroll;\n    -webkit-overflow-scrolling: touch;\n    text-align: left; }\n  .search li {\n    padding: 8px 0 8px 30px;\n    font-size: 18px; }\n\n.detail {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding-top: 20px;\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);\n  background-attachment: fixed; }\n  .detail > .header {\n    position: relative;\n    margin-bottom: 20px;\n    font-size: 18px;\n    font-size: 22px; }\n    .detail > .header a {\n      position: absolute;\n      width: 22px;\n      height: 22px;\n      top: 14px;\n      left: 24px; }\n      .detail > .header a img {\n        height: 22px;\n        width: 22px; }\n\n.infobox {\n  display: flex;\n  margin: 16px 0;\n  background: rgba(58, 123, 213, 0.31); }\n  .infobox > div {\n    width: 76%;\n    margin: auto;\n    padding: 20px 0;\n    display: flex; }\n    .infobox > div > b {\n      flex: 0 0 50%;\n      width: 60%;\n      font-weight: bold;\n      font-size: 62px;\n      text-align: right; }\n    .infobox > div > div {\n      flex: 1 1;\n      display: flex;\n      flex-direction: column; }\n  .infobox img {\n    margin: 10px; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box;\n  font-family: 'Lobster Two', cursive;\n  padding: 0;\n  margin: 0; }\n\nhtml, body {\n  height: 100%;\n  width: 100%;\n  color: white; }\n\nbody {\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);\n  background-attachment: fixed;\n  text-align: center; }\n\nh1 {\n  margin: auto;\n  margin-top: 25px;\n  margin-bottom: 30px;\n  font-weight: 700;\n  font-family: 'Lobster Two', cursive;\n  transition: all .1s ease-out; }\n\n::-webkit-input-placeholder {\n  /* Chrome/Opera/Safari */\n  color: rgba(255, 255, 255, 0.6); }\n\n::-moz-placeholder {\n  /* Firefox 19+ */\n  color: rgba(255, 255, 255, 0.6); }\n\n:-ms-input-placeholder {\n  /* IE 10+ */\n  color: rgba(255, 255, 255, 0.6); }\n\n:-moz-placeholder {\n  /* Firefox 18- */\n  color: rgba(255, 255, 255, 0.6); }\n\n#agua, .main, .search {\n  height: 100%; }\n\n.search {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding-top: 20px; }\n  .search.condensed > .textbox {\n    margin-top: -90px; }\n  .search.condensed > h1 {\n    opacity: 0; }\n  .search .textbox {\n    position: relative;\n    padding: 0 20px;\n    transition: all .3s ease-out; }\n    .search .textbox div {\n      padding: 0 10px; }\n    .search .textbox input {\n      width: 100%;\n      background: none;\n      border: none;\n      line-height: 33px;\n      font-size: 18px;\n      color: white;\n      border-radius: 0;\n      outline: none; }\n    .search .textbox img {\n      position: absolute;\n      right: 30px;\n      top: 6px;\n      height: 20px; }\n  .search > ul {\n    flex: 1 1;\n    list-style-type: none;\n    overflow: scroll;\n    -webkit-overflow-scrolling: touch;\n    text-align: left; }\n  .search li {\n    padding: 8px 0 8px 30px;\n    font-size: 18px; }\n\n.detail {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding-top: 20px;\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);\n  background-attachment: fixed; }\n  .detail > .header {\n    position: relative;\n    margin-bottom: 20px;\n    font-size: 18px;\n    font-size: 22px; }\n    .detail > .header a {\n      position: absolute;\n      width: 22px;\n      height: 22px;\n      top: 14px;\n      left: 24px; }\n      .detail > .header a img {\n        height: 22px;\n        width: 22px; }\n\n.infobox {\n  display: flex;\n  margin: 16px 0;\n  background: rgba(58, 123, 213, 0.31); }\n  .infobox > div {\n    width: 76%;\n    margin: auto;\n    padding: 20px 0;\n    display: flex; }\n    .infobox > div > b {\n      flex: 0 0 50%;\n      width: 60%;\n      font-weight: bold;\n      font-size: 62px;\n      text-align: right; }\n    .infobox > div > div {\n      flex: 1 1;\n      display: flex;\n      flex-direction: column; }\n  .infobox img {\n    margin: 10px; }\n", ""]);
 
 // exports
 
@@ -14520,9 +14526,14 @@ mapStateToProps = function(arg$){
 };
 mapDispatchToProps = function(dispatch){
   return {
-    onInputFocus: function(){
+    onFocus: function(){
       return dispatch({
         type: 'FOCUS_SEARCH_INPUT'
+      });
+    },
+    onBlur: function(){
+      return dispatch({
+        type: 'BLUR_SEARCH_INPUT'
       });
     },
     onChange: function(arg$){
@@ -14555,17 +14566,20 @@ waveyLine = function(){
   }));
 };
 module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
-  var searchText, searchResults, inputHasFocus, onChange, onSelectStation, onInputFocus, id, name, water_body_name;
-  searchText = arg$.searchText, searchResults = arg$.searchResults, inputHasFocus = arg$.inputHasFocus, onChange = arg$.onChange, onSelectStation = arg$.onSelectStation, onInputFocus = arg$.onInputFocus;
+  var searchText, searchResults, inputHasFocus, onChange, onSelectStation, onFocus, onBlur, showAsCondensed, id, name, water_body_name;
+  searchText = arg$.searchText, searchResults = arg$.searchResults, inputHasFocus = arg$.inputHasFocus, onChange = arg$.onChange, onSelectStation = arg$.onSelectStation, onFocus = arg$.onFocus, onBlur = arg$.onBlur;
+  showAsCondensed = inputHasFocus || searchResults.length > 0;
+  console.log(inputHasFocus, searchResults.length, inputHasFocus || searchResults.size > 0);
   return div({
-    className: "search " + (inputHasFocus ? "input-has-focus" : void 8)
+    className: "search " + (showAsCondensed ? "condensed" : void 8)
   }, h1({}, "FlowFlow"), div({
     className: "textbox"
   }, div({}, input({
+    onFocus: onFocus,
     onChange: onChange,
+    onBlur: onBlur,
     type: "text",
     value: searchText,
-    onFocus: onInputFocus,
     placeholder: "Search"
   }), img({
     src: searchIcon
