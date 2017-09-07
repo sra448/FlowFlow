@@ -116,11 +116,18 @@ h1 {
   background: linear-gradient(to bottom, #00b8e0, #3a7bd5);
   background-attachment: fixed;
 
+  .station-name {
+    font-size: 0.8em;
+    margin-bottom: 6px;
+  }
+
   > .header {
     position: relative;
     margin-bottom: 20px;
     font-size: 18px;
     font-size: 22px;
+
+    letter-spacing: 1.2;
 
     a {
       position: absolute;
