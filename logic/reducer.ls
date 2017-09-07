@@ -78,12 +78,7 @@ reset-current-station-data = (state) ->
 
 
 unselect-station = (state) ->
-  {
-    ...state,
-    search-text: "",
-    search-results: [],
-    selected-station: undefined
-  }
+  { ...state, selected-station: undefined }
 
 
 
