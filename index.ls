@@ -4,6 +4,9 @@
 { Provider } = require \react-redux
 
 
+backend-url = "https://waterbuddy.herokuapp.com/api"
+
+
 reducer = require "./logic/reducer.ls"
 ui = require "./views/main.ls"
 
@@ -17,12 +20,12 @@ render app, document.get-element-by-id \agua
 
 # load data
 
-fetch "https://flowflow.ch/api/stations"
+fetch "#{backend-url}/stations"
   .then (resp) -> resp.json()
   .then (stations) ->
     store.dispatch { type: \STATIONS_LOADED, stations }
 
-fetch "https://flowflow.ch/api/measurements"
+fetch "#{backend-url}/measurements"
   .then (resp) -> resp.json()
   .then (measurements) ->
     store.dispatch { type: \MEASUREMENTS_LOADED, measurements }
