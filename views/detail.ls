@@ -39,6 +39,8 @@ module.exports = do
       if !selected-station
         div {}
       else
+        sync-date = new Date selected-station.measurements[0].datetime
+
         div { class-name: "detail" },
           div { class-name: "header" },
             a { on-click: on-back },
@@ -48,3 +50,6 @@ module.exports = do
 
           for m in selected-station.measurements
             measurement-box m
+
+          div {},
+            sync-date.toLocaleString()

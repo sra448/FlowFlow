@@ -61,11 +61,11 @@ select-station = (state, id) ->
 
 reset-current-station-data = (state) ->
   id = state.selected-station?.id
+  station = state.stations.find (s) -> s.id == id
 
-  if !id
+  if !station
     state
   else
-    station = state.stations.find (s) -> s.id == id
     {
       ...state
       selected-station: {
