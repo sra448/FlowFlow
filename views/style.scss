@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Lobster Two', cursive;
+  font-family: sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -29,15 +29,19 @@ h1 {
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: rgba(255, 255, 255, .6);
+  font-weight: normal;
 }
 ::-moz-placeholder { /* Firefox 19+ */
   color: rgba(255, 255, 255, .6);
+  font-weight: normal;
 }
 :-ms-input-placeholder { /* IE 10+ */
   color: rgba(255, 255, 255, .6);
+  font-weight: normal;
 }
 :-moz-placeholder { /* Firefox 18- */
   color: rgba(255, 255, 255, .6);
+  font-weight: normal;
 }
 
 #agua, .main, .search {
