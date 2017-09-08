@@ -1,17 +1,17 @@
 { create-element, DOM } = require \react
-{ create-store } = require \redux
+{ create-store, apply-middleware } = require \redux
 { render } = require \react-dom
 { Provider } = require \react-redux
-
-
-backend-url = "https://waterbuddy.herokuapp.com/api"
+{ create-epic-middleware, combine-epics } = require \redux-observable
 
 
 reducer = require "./logic/reducer.ls"
+epic = require "./logic/epic.ls"
 ui = require "./views/main.ls"
 
 
-store = create-store reducer
+epic-middleware = create-epic-middleware epic
+store = create-store reducer, apply-middleware epic-middleware
 app = create-element Provider, { store }, ui {}
 
 
@@ -19,6 +19,10 @@ render app, document.get-element-by-id \agua
 
 
 # load data
+# TODO: maybe find a better place for this in an epic?
+
+backend-url = "https://waterbuddy.herokuapp.com/api"
+
 
 fetch "#{backend-url}/stations"
   .then (resp) -> resp.json()
