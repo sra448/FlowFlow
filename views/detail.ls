@@ -23,6 +23,16 @@ random-between = (a, b) ->
   Math.floor (Math.random() * (b - a)) + a
 
 
+weather-box = ({ air_temp, indicator }) ->
+  div { class-name: "infobox" },
+    div {},
+      b {}, air_temp
+      div {},
+        img { src: indicator }
+        div {}, indicator
+        div {}, "\u00b0C"
+
+
 measurement-box = ({ measurementType, value, unit }) ->
   div { class-name: "infobox" },
     div {},
@@ -50,6 +60,10 @@ module.exports = do
 
           for m in selected-station.measurements
             measurement-box m
+
+          if selected-station.weather
+            weather-box selected-station.weather
+
 
           div {},
             sync-date.toLocaleString()

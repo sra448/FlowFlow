@@ -73,8 +73,13 @@ reset-current-station-data = (state) ->
         name: station.name
         water-body-name: station.water_body_name
         measurements: state.measurements[id]
+        weather: undefined
       }
     }
+
+
+station-weather-loaded = (state, weather) ->
+  { ...state, selected-station: { ...state.selected-station, weather } }
 
 
 unselect-station = (state) ->
@@ -83,7 +88,6 @@ unselect-station = (state) ->
 
 
 module.exports = (state = initial-state, action) ->
-  console.log state, action
   switch action.type
     case \STATIONS_LOADED then reset-search-results reset-stations state, action.stations
     case \MEASUREMENTS_LOADED then reset-current-station-data reset-measurements state, action.measurements
@@ -91,5 +95,6 @@ module.exports = (state = initial-state, action) ->
     case \BLUR_SEARCH_INPUT then blur-search-input state
     case \CHANGE_SEARCH_TEXT then reset-search-results change-search-text state, action.search-text
     case \SELECT_STATION then select-station state, action.id
+    case \STATION_WEATHER_LOADED then station-weather-loaded state, action.weather
     case \UNSELECT_STATION then unselect-station state
     default state
