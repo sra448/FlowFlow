@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -30,15 +30,19 @@ h1 {
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: rgba(255, 255, 255, .6);
+  font-weight: normal;
 }
 ::-moz-placeholder { /* Firefox 19+ */
   color: rgba(255, 255, 255, .6);
+  font-weight: normal;
 }
 :-ms-input-placeholder { /* IE 10+ */
   color: rgba(255, 255, 255, .6);
+  font-weight: normal;
 }
 :-moz-placeholder { /* Firefox 18- */
   color: rgba(255, 255, 255, .6);
+  font-weight: normal;
 }
 
 #agua, .main, .search {
@@ -113,11 +117,18 @@ h1 {
   background: linear-gradient(to bottom, #00b8e0, #3a7bd5);
   background-attachment: fixed;
 
+  .station-name {
+    font-size: 0.8em;
+    margin-bottom: 6px;
+  }
+
   > .header {
     position: relative;
     margin-bottom: 20px;
     font-size: 18px;
     font-size: 22px;
+
+    letter-spacing: 1.2;
 
     a {
       position: absolute;

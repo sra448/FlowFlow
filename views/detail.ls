@@ -39,12 +39,17 @@ module.exports = do
       if !selected-station
         div {}
       else
+        sync-date = new Date selected-station.measurements[0].datetime
+
         div { class-name: "detail" },
           div { class-name: "header" },
             a { on-click: on-back },
               img { src: back-icon }
+            div { class-name: "station-name" }, selected-station.name
             div {}, selected-station.waterBodyName
-            div {}, selected-station.name
 
           for m in selected-station.measurements
             measurement-box m
+
+          div {},
+            sync-date.toLocaleString()

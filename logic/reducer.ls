@@ -11,11 +11,6 @@ initial-state = do
   selected-station: undefined
 
 
-load-stations = (state, stations) ->
-  reset-fuzzy-searcher stations
-  { ...state, stations }
-
-
 stations-searcher = { search: -> [] }
 reset-fuzzy-searcher = (stations) ->
   stations-searcher := new Fuse stations, {
@@ -28,7 +23,12 @@ reset-fuzzy-searcher = (stations) ->
   }
 
 
-load-measurements = (state, measurements) ->
+reset-stations = (state, stations) ->
+  reset-fuzzy-searcher stations
+  { ...state, stations }
+
+
+reset-measurements = (state, measurements) ->
   { ...state, measurements }
 
 
@@ -41,41 +41,55 @@ blur-search-input = (state) ->
 
 
 change-search-text = (state, search-text) ->
-  ids = stations-searcher.search search-text
+  { ...state, search-text }
+
+
+reset-search-results = (state) ->
+  ids = stations-searcher.search state.search-text
   search-results = state.stations.filter (s) -> s.id in ids
-  { ...state, search-text, search-results }
+  { ...state, search-results }
 
 
 select-station = (state, id) ->
-  station = state.stations.find (s) -> s.id == id
-  {
+  reset-current-station-data {
     ...state
     selected-station: {
-      name: station.name
-      water-body-name: station.water_body_name
-      measurements: state.measurements[id]
+      id: id
     }
   }
 
 
+reset-current-station-data = (state) ->
+  id = state.selected-station?.id
+  station = state.stations.find (s) -> s.id == id
+
+  if !station
+    state
+  else
+    {
+      ...state
+      selected-station: {
+        id: id
+        name: station.name
+        water-body-name: station.water_body_name
+        measurements: state.measurements[id]
+      }
+    }
+
+
 unselect-station = (state) ->
-  {
-    ...state,
-    search-text: "",
-    search-results: [],
-    selected-station: undefined
-  }
+  { ...state, selected-station: undefined }
 
 
 
 module.exports = (state = initial-state, action) ->
   console.log state, action
   switch action.type
-    case \STATIONS_LOADED then load-stations state, action.stations
-    case \MEASUREMENTS_LOADED then load-measurements state, action.measurements
+    case \STATIONS_LOADED then reset-search-results reset-stations state, action.stations
+    case \MEASUREMENTS_LOADED then reset-current-station-data reset-measurements state, action.measurements
     case \FOCUS_SEARCH_INPUT then focus-search-input state
     case \BLUR_SEARCH_INPUT then blur-search-input state
-    case \CHANGE_SEARCH_TEXT then change-search-text state, action.search-text
+    case \CHANGE_SEARCH_TEXT then reset-search-results change-search-text state, action.search-text
     case \SELECT_STATION then select-station state, action.id
     case \UNSELECT_STATION then unselect-station state
     default state
