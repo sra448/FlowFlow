@@ -1,6 +1,7 @@
 module.exports = {
   entry: {
-    "index": "./index.ls"
+    "index": "./index.ls",
+    "service-worker": "./service-worker.ls",
   },
   output: {
     path: __dirname,
