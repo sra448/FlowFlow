@@ -44,5 +44,5 @@ module.exports = do
           wavey-line {}
         ul {},
           for { id, name, water_body_name } in search-results
-            li { on-click: on-select-station id },
+            li { key: id, on-click: on-select-station id },
               "#{water_body_name}, #{name}"

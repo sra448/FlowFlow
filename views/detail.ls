@@ -7,7 +7,12 @@ back-icon = require "./icons/back.svg"
 drain-icon = require "./icons/drain.svg"
 level-icon = require "./icons/level.svg"
 temperatur-icon = require "./icons/temperatur.svg"
-wheater-icon = require "./icons/wheater.svg"
+
+
+weather-icons =
+  sun: require "./icons/wheater.svg"
+  sun_cloud: require "./icons/wheater.svg"
+  cloud: require "./icons/wheater.svg"
 
 
 map-state-to-props = ({ selected-station }) ->
@@ -28,18 +33,18 @@ weather-box = ({ air_temp, indicator }) ->
     div {},
       b {}, air_temp
       div {},
-        img { src: indicator }
+        img { src: weather-icons[indicator] }
         div {}, indicator
         div {}, "\u00b0C"
 
 
-measurement-box = ({ measurementType, value, unit }) ->
+measurement-box = ({ measurement-type, value, unit }) ->
   div { class-name: "infobox" },
     div {},
       b {}, value
       div {},
         img { src: drain-icon }
-        div {}, measurementType
+        div {}, measurement-type
         div {}, unit
 
 
@@ -59,11 +64,11 @@ module.exports = do
             div {}, selected-station.waterBodyName
 
           for m in selected-station.measurements
-            measurement-box m
+            div {key: m.measurement-type},
+              measurement-box { ...m, key: m.measurement-type }
 
           if selected-station.weather
             weather-box selected-station.weather
-
 
           div {},
             sync-date.toLocaleString()
