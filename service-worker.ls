@@ -1,4 +1,4 @@
-PRECACHE = 'flowflow-v1.0.2'
+PRECACHE = 'flowflow-v1.0.3'
 RUNTIME = "prod"
 
 PRECACHE_URLS = [
