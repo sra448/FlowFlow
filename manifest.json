@@ -1,0 +1,8 @@
+{
+  "name": "FlowFlow",
+  "short_name": "FlowFlow",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#00b8e0",
+  "description": "Wanna go to the rivers?"
+}
