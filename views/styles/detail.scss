@@ -18,6 +18,10 @@
     margin-bottom: 4px;
   }
 
+  .small {
+    font-size: 0.8em;
+  }
+
   .header {
     position: relative;
     height: 40px;
@@ -41,7 +45,8 @@
   }
 
   .infos {
-    overflow-y: scroll
+    overflow-y: scroll;
+    padding-bottom: 20px;
   }
 
   .infobox {
@@ -71,7 +76,8 @@
     }
 
     img {
-      margin: 10px;
+      margin: 10px auto;
+      max-width: 50px;
     }
   }
 

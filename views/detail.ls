@@ -3,17 +3,17 @@
 { div, a, b, img, h1, strong } = DOM
 
 
-back-icon = require "./icons/back.svg"
-drain-icon = require "./icons/drain.svg"
-level-icon = require "./icons/level.svg"
-temperatur-icon = require "./icons/temperatur.svg"
-
-
-weather-icons =
-  sun: require "./icons/wheater.svg"
-  sun_cloud: require "./icons/wheater.svg"
-  cloud: require "./icons/wheater.svg"
-  rain: require "./icons/wheater.svg"
+icons =
+  back: require "./icons/back.svg"
+  type:
+    Discharge: require "./icons/drain.svg"
+    SeaLevel: require "./icons/level.svg"
+    Temperature: require "./icons/temperatur.svg"
+  weather:
+    sun: require "./icons/sun.svg"
+    sun_cloud: require "./icons/cloud-sun.svg"
+    cloud: require "./icons/cloud.svg"
+    rain: require "./icons/rain.svg"
 
 
 map-state-to-props = ({ selected-station }) ->
@@ -32,7 +32,7 @@ random-between = (a, b) ->
 header = ({ selected-station, on-back }) ->
   div { class-name: "header" },
     a { on-click: on-back },
-      img { src: back-icon }
+      img { src: icons.back }
     div { class-name: "station-name" }, selected-station.name
     div {}, selected-station.water-body-name
 
@@ -42,9 +42,8 @@ weather-box = ({ air_temp, indicator }) ->
     div {},
       b {}, air_temp
       div {},
-        img { src: weather-icons[indicator] }
-        div {}, indicator
-        div {}, "\u00b0C"
+        img { src: icons.weather[indicator] }
+        div { class-name: "small" }, indicator
 
 
 measurement-box = ({ measurement-type, value, unit }) ->
@@ -52,8 +51,8 @@ measurement-box = ({ measurement-type, value, unit }) ->
     div {},
       b {}, value
       div {},
-        img { src: drain-icon }
-        div {}, measurement-type
+        img { src: icons.type[measurement-type] }
+        div { class-name: "small" }, measurement-type
         div {}, unit
 
 
@@ -76,5 +75,5 @@ module.exports = do
             if selected-station.weather
               weather-box selected-station.weather
 
-            div {},
+            div { class-name: "small" },
               sync-date.toLocaleString()
