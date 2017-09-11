@@ -68,7 +68,7 @@ module.exports = do
         div { class-name: "detail" },
           header { selected-station, on-back }
 
-          div {},
+          div { class-name: "infos" },
             for m in selected-station.measurements
               div {key: m.measurement-type},
                 measurement-box { ...m, key: m.measurement-type }

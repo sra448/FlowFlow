@@ -1,24 +1,27 @@
 .detail {
+  display: flex;
+  flex-flow: column;
+
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  padding-top: 20px;
+  padding-top: 10px;
 
   background: #3a7bd5;
   background: linear-gradient(to bottom, #00b8e0, #3a7bd5);
   background-attachment: fixed;
 
   .station-name {
-    font-size: 0.8em;
-    margin-bottom: 6px;
+    font-size: 0.7em;
+    margin-bottom: 4px;
   }
 
-  > .header {
+  .header {
     position: relative;
+    height: 40px;
     margin-bottom: 20px;
-    font-size: 18px;
     font-size: 22px;
 
     letter-spacing: 1.2;
@@ -36,35 +39,40 @@
       }
     }
   }
-}
 
-.infobox {
-  display: flex;
-  margin: 16px 0;
-  background: rgba(58, 123, 213, 0.31);
+  .infos {
+    overflow-y: scroll
+  }
 
-  > div {
-    width: 76%;
-    margin: auto;
-    padding: 20px 0;
+  .infobox {
     display: flex;
-
-    > b {
-      flex: 0 0 50%;
-      width: 60%;
-      font-weight: bold;
-      font-size: 62px;
-      text-align: right;
-    }
+    margin: 16px 0;
+    background: rgba(58, 123, 213, 0.31);
 
     > div {
-      flex: 1 1;
+      width: 76%;
+      margin: auto;
+      padding: 20px 0;
       display: flex;
-      flex-direction: column;
+
+      > b {
+        flex: 0 0 50%;
+        width: 60%;
+        font-weight: bold;
+        font-size: 62px;
+        text-align: right;
+      }
+
+      > div {
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    img {
+      margin: 10px;
     }
   }
 
-  img {
-    margin: 10px;
-  }
 }
