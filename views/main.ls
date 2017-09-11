@@ -4,7 +4,7 @@
 search-ui = require "./search.ls"
 detail-ui = require "./detail.ls"
 
-require "./style.scss"
+require "./styles/main.scss"
 
 
 module.exports = ->

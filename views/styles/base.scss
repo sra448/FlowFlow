@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+
+body {
+  background: #3a7bd5;
+  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);
+  background-attachment: fixed;
+  text-align: center;
+}
+
+h1 {
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-family: 'Lobster Two', cursive;
+  transition: all .1s ease-out;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255, 255, 255, .6);
+  font-weight: normal;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(255, 255, 255, .6);
+  font-weight: normal;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(255, 255, 255, .6);
+  font-weight: normal;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: rgba(255, 255, 255, .6);
+  font-weight: normal;
+}
+
+#agua, .main, .search {
+  height: 100%;
+}
