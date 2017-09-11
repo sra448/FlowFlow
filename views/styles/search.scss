@@ -1,0 +1,55 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10px;
+
+  &.condensed > .textbox {
+    margin-top: -90px;
+  }
+
+  &.condensed > h1 {
+    opacity: 0;
+  }
+
+  .textbox {
+    position: relative;
+    padding: 0 20px;
+    transition: all .3s ease-out;
+
+    div {
+      padding: 0 10px;
+    }
+
+    input {
+      width: 100%;
+      background: none;
+      border: none;
+      line-height: 33px;
+      font-size: 18px;
+      color: white;
+      border-radius: 0;
+      outline: none;
+    }
+
+    img {
+      position: absolute;
+      right: 30px;
+      top: 6px;
+      height: 20px;
+    }
+  }
+
+  > ul {
+    flex: 1 1;
+    list-style-type: none;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    text-align: left;
+  }
+
+  li {
+    padding: 8px 0 8px 30px;
+    font-size: 18px;
+  }
+}

@@ -7,7 +7,13 @@ back-icon = require "./icons/back.svg"
 drain-icon = require "./icons/drain.svg"
 level-icon = require "./icons/level.svg"
 temperatur-icon = require "./icons/temperatur.svg"
-wheater-icon = require "./icons/wheater.svg"
+
+
+weather-icons =
+  sun: require "./icons/wheater.svg"
+  sun_cloud: require "./icons/wheater.svg"
+  cloud: require "./icons/wheater.svg"
+  rain: require "./icons/wheater.svg"
 
 
 map-state-to-props = ({ selected-station }) ->
@@ -23,23 +29,31 @@ random-between = (a, b) ->
   Math.floor (Math.random() * (b - a)) + a
 
 
+header = ({ selected-station, on-back }) ->
+  div { class-name: "header" },
+    a { on-click: on-back },
+      img { src: back-icon }
+    div { class-name: "station-name" }, selected-station.name
+    div {}, selected-station.water-body-name
+
+
 weather-box = ({ air_temp, indicator }) ->
   div { class-name: "infobox" },
     div {},
       b {}, air_temp
       div {},
-        img { src: indicator }
+        img { src: weather-icons[indicator] }
         div {}, indicator
         div {}, "\u00b0C"
 
 
-measurement-box = ({ measurementType, value, unit }) ->
+measurement-box = ({ measurement-type, value, unit }) ->
   div { class-name: "infobox" },
     div {},
       b {}, value
       div {},
         img { src: drain-icon }
-        div {}, measurementType
+        div {}, measurement-type
         div {}, unit
 
 
@@ -52,18 +66,15 @@ module.exports = do
         sync-date = new Date selected-station.measurements[0].datetime
 
         div { class-name: "detail" },
-          div { class-name: "header" },
-            a { on-click: on-back },
-              img { src: back-icon }
-            div { class-name: "station-name" }, selected-station.name
-            div {}, selected-station.waterBodyName
+          header { selected-station, on-back }
 
-          for m in selected-station.measurements
-            measurement-box m
+          div { class-name: "infos" },
+            for m in selected-station.measurements
+              div {key: m.measurement-type},
+                measurement-box { ...m, key: m.measurement-type }
 
-          if selected-station.weather
-            weather-box selected-station.weather
+            if selected-station.weather
+              weather-box selected-station.weather
 
-
-          div {},
-            sync-date.toLocaleString()
+            div {},
+              sync-date.toLocaleString()

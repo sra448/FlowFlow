@@ -34,7 +34,6 @@ module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
     ({ search-text, search-results, input-has-focus, on-change, on-select-station, on-focus, on-blur }) ->
       show-as-condensed = input-has-focus || search-results.length > 0
-      console.log input-has-focus, search-results.length, input-has-focus || search-results.size > 0
 
       div { class-name: "search #{"condensed" if show-as-condensed}" },
         h1 {}, "FlowFlow"
@@ -45,5 +44,5 @@ module.exports = do
           wavey-line {}
         ul {},
           for { id, name, water_body_name } in search-results
-            li { on-click: on-select-station id },
+            li { key: id, on-click: on-select-station id },
               "#{water_body_name}, #{name}"

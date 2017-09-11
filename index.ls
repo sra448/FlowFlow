@@ -33,3 +33,11 @@ fetch "#{backend-url}/measurements"
   .then (resp) -> resp.json()
   .then (measurements) ->
     store.dispatch { type: \MEASUREMENTS_LOADED, measurements }
+
+
+# register this app as a PWA
+if navigator.service-worker
+  navigator
+    .service-worker
+    .register "./service-worker.js"
+    .then -> console.log "Service Worker Registered"
