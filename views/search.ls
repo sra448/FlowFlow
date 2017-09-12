@@ -43,6 +43,6 @@ module.exports = do
             img { src: search-icon }
           wavey-line {}
         ul {},
-          for { id, name, water_body_name } in search-results
+          for { id, name, water-body-name } in search-results
             li { key: id, on-click: on-select-station id },
-              "#{water_body_name}, #{name}"
+              "#{water-body-name}, #{name}"
