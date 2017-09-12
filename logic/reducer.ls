@@ -9,6 +9,7 @@ initial-state = do
   input-has-focus: false
   search-results: []
   selected-station: undefined
+  starred-station-ids: []
 
 
 stations-searcher = { search: -> [] }
@@ -58,22 +59,17 @@ reset-current-station-data = (state) ->
 
 
 set-current-station-data = (state, id) ->
-  id = id || state.selected-station?.id
   station = state.stations.find (s) -> s.id == id
-
-  if !station
-    state
-  else
-    {
-      ...state
-      selected-station: {
-        id: id
-        name: station.name
-        water-body-name: station.water-body-name
-        measurements: state.measurements[id]
-        weather: undefined
-      }
+  {
+    ...state
+    selected-station: {
+      id: id
+      name: station.name
+      water-body-name: station.water-body-name
+      measurements: state.measurements[id]
+      weather: undefined
     }
+  }
 
 
 station-weather-loaded = (state, weather) ->
@@ -83,6 +79,20 @@ station-weather-loaded = (state, weather) ->
 unselect-station = (state) ->
   { ...state, selected-station: undefined }
 
+
+toggle-station-star = (state, id) ->
+  if id in state.starred-station-ids
+    unstar-station state, id
+  else
+    star-station state, id
+
+
+star-station = (state, id) ->
+  { ...state, starred-station-ids: [...state.starred-station-ids, id] }
+
+
+unstar-station = (state, id) ->
+  { ...state, starred-station-ids: state.starred-station-ids.filter (x) -> x != id }
 
 
 module.exports = (state = initial-state, action) ->
@@ -114,6 +124,9 @@ module.exports = (state = initial-state, action) ->
 
     case \STATION_UNSELECTED
       unselect-station state
+
+    case \STATION_STAR_TOGGLED
+      toggle-station-star state, action.id
 
     default
       state

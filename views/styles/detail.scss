@@ -23,6 +23,7 @@
   }
 
   .header {
+    display: flex;
     position: relative;
     height: 40px;
     margin-bottom: 20px;
@@ -30,14 +31,15 @@
 
     letter-spacing: 1.2;
 
+    > div {
+      flex: 1 1;
+    }
+
     a {
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      top: 14px;
-      left: 24px;
+      flex: 0 0 16%;
 
       img {
+        margin-top: 5px;
         height: 22px;
         width: 22px;
       }

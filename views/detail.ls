@@ -5,6 +5,8 @@
 
 icons =
   back: require "./icons/back.svg"
+  star: require "./icons/star.svg"
+  star-empty: require "./icons/star-empty.svg"
   type:
     Discharge: require "./icons/drain.svg"
     SeaLevel: require "./icons/level.svg"
@@ -16,25 +18,31 @@ icons =
     rain: require "./icons/rain.svg"
 
 
-map-state-to-props = ({ selected-station }) ->
-  { selected-station }
+map-state-to-props = ({ selected-station, starred-station-ids }) ->
+  is-starred = selected-station && selected-station.id in starred-station-ids
+  { selected-station, is-starred }
 
 
 map-dispatch-to-props = (dispatch) ->
-  on-back: ({ target }) ->
+  on-back: ->
     dispatch { type: \STATION_UNSELECTED }
+  on-toggle-star: (id) -> ->
+    dispatch { type: \STATION_STAR_TOGGLED, id }
 
 
 random-between = (a, b) ->
   Math.floor (Math.random() * (b - a)) + a
 
 
-header = ({ selected-station, on-back }) ->
+header = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
   div { class-name: "header" },
     a { on-click: on-back },
       img { src: icons.back }
-    div { class-name: "station-name" }, selected-station.name
-    div {}, selected-station.water-body-name
+    div {},
+      div { class-name: "station-name" }, selected-station.name
+      div {}, selected-station.water-body-name
+    a { on-click: on-toggle-star selected-station.id },
+      img { src: if is-starred then icons.star else icons.star-empty }
 
 
 weather-box = ({ air-temp, indicator }) ->
@@ -58,14 +66,14 @@ measurement-box = ({ measurement-type, value, unit }) ->
 
 module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
-    ({ selected-station, on-back }) ->
+    ({ selected-station, is-starred, on-back, on-toggle-star }) ->
       if !selected-station
         div {}
       else
         sync-date = new Date selected-station.measurements[0].datetime
 
         div { class-name: "detail" },
-          header { selected-station, on-back }
+          header { selected-station, on-back, on-toggle-star, is-starred }
 
           div { class-name: "infos" },
             for m in selected-station.measurements
