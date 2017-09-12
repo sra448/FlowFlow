@@ -39,7 +39,7 @@ module.exports = do
         h1 {}, "FlowFlow"
         div { class-name: "textbox" },
           div {},
-            input { on-focus, on-change, on-blur, type: "text", value: search-text, placeholder: "River or Lake" }
+            input { on-focus, on-change, on-blur, type: "search", value: search-text, placeholder: "River or Lake" }
             img { src: search-icon }
           wavey-line {}
         ul {},
