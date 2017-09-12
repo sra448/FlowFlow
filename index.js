@@ -17853,7 +17853,7 @@ stationsSearcher = {
 };
 resetFuzzySearcher = function(stations){
   return stationsSearcher = new Fuse(stations, {
-    keys: ["name", "water_body_name"],
+    keys: ["name", "waterBodyName"],
     id: "id",
     distance: 0,
     findAllMatches: true,
@@ -17908,7 +17908,7 @@ resetCurrentStationData = function(state){
     return ref1$ = {}, import$(ref1$, state), ref1$.selectedStation = {
       id: id,
       name: station.name,
-      waterBodyName: station.water_body_name,
+      waterBodyName: station.waterBodyName,
       measurements: state.measurements[id],
       weather: undefined
     }, ref1$;
@@ -20865,7 +20865,7 @@ icons = {
   },
   weather: {
     sun: __webpack_require__(604),
-    sun_cloud: __webpack_require__(598),
+    sunCloud: __webpack_require__(598),
     cloud: __webpack_require__(599),
     rain: __webpack_require__(602)
   }
@@ -20905,11 +20905,11 @@ header = function(arg$){
   }, selectedStation.name), div({}, selectedStation.waterBodyName));
 };
 weatherBox = function(arg$){
-  var air_temp, indicator;
-  air_temp = arg$.air_temp, indicator = arg$.indicator;
+  var airTemp, indicator;
+  airTemp = arg$.airTemp, indicator = arg$.indicator;
   return div({
     className: "infobox"
-  }, div({}, b({}, air_temp), div({}, img({
+  }, div({}, b({}, airTemp), div({}, img({
     src: icons.weather[indicator]
   }), div({
     className: "small"
@@ -21023,7 +21023,7 @@ waveyLine = function(){
   }));
 };
 module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
-  var searchText, searchResults, inputHasFocus, onChange, onSelectStation, onFocus, onBlur, showAsCondensed, id, name, water_body_name;
+  var searchText, searchResults, inputHasFocus, onChange, onSelectStation, onFocus, onBlur, showAsCondensed, id, name, waterBodyName;
   searchText = arg$.searchText, searchResults = arg$.searchResults, inputHasFocus = arg$.inputHasFocus, onChange = arg$.onChange, onSelectStation = arg$.onSelectStation, onFocus = arg$.onFocus, onBlur = arg$.onBlur;
   showAsCondensed = inputHasFocus || searchResults.length > 0;
   return div({
@@ -21042,11 +21042,11 @@ module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
   })), waveyLine({})), ul({}, (function(){
     var i$, ref$, len$, ref1$, results$ = [];
     for (i$ = 0, len$ = (ref$ = searchResults).length; i$ < len$; ++i$) {
-      ref1$ = ref$[i$], id = ref1$.id, name = ref1$.name, water_body_name = ref1$.water_body_name;
+      ref1$ = ref$[i$], id = ref1$.id, name = ref1$.name, waterBodyName = ref1$.waterBodyName;
       results$.push(li({
         key: id,
         onClick: onSelectStation(id)
-      }, water_body_name + ", " + name));
+      }, waterBodyName + ", " + name));
     }
     return results$;
   }())));
