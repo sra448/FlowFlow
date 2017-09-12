@@ -21034,7 +21034,7 @@ module.exports = connect(mapStateToProps, mapDispatchToProps)(function(arg$){
     onFocus: onFocus,
     onChange: onChange,
     onBlur: onBlur,
-    type: "text",
+    type: "search",
     value: searchText,
     placeholder: "River or Lake"
   }), img({
