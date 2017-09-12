@@ -22,7 +22,7 @@ map-state-to-props = ({ selected-station }) ->
 
 map-dispatch-to-props = (dispatch) ->
   on-back: ({ target }) ->
-    dispatch { type: \UNSELECT_STATION }
+    dispatch { type: \STATION_UNSELECTED }
 
 
 random-between = (a, b) ->

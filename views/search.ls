@@ -12,15 +12,15 @@ map-state-to-props = ({ search-text, search-results, input-has-focus }) ->
 
 map-dispatch-to-props = (dispatch) ->
   on-focus: ->
-    dispatch { type: \FOCUS_SEARCH_INPUT }
+    dispatch { type: \SEARCHBOX_FOCUSED }
   on-blur: ->
-    dispatch { type: \BLUR_SEARCH_INPUT }
+    dispatch { type: \SEARCHBOX_BLURRED }
   on-clear: ({ target }) ->
-    dispatch { type: \CHANGE_SEARCH_TEXT, search-text: "" }
+    dispatch { type: \SEARCHBOX_TEXT_CHANGED, search-text: "" }
   on-change: ({ target }) ->
-    dispatch { type: \CHANGE_SEARCH_TEXT, search-text: target.value }
+    dispatch { type: \SEARCHBOX_TEXT_CHANGED, search-text: target.value }
   on-select-station: (id) -> ->
-    dispatch { type: \SELECT_STATION, id }
+    dispatch { type: \STATION_SELECTED, id }
 
 
 wavey-line = ->

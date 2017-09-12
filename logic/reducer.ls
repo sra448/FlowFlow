@@ -50,17 +50,15 @@ reset-search-results = (state) ->
   { ...state, search-results }
 
 
-select-station = (state, id) ->
-  reset-current-station-data {
-    ...state
-    selected-station: {
-      id: id
-    }
-  }
-
-
 reset-current-station-data = (state) ->
-  id = state.selected-station?.id
+  if state.selected-station
+    set-current-station-data state, state.selected-station.id
+  else
+    state
+
+
+set-current-station-data = (state, id) ->
+  id = id || state.selected-station?.id
   station = state.stations.find (s) -> s.id == id
 
   if !station
@@ -89,12 +87,33 @@ unselect-station = (state) ->
 
 module.exports = (state = initial-state, action) ->
   switch action.type
-    case \STATIONS_LOADED then reset-search-results reset-stations state, action.stations
-    case \MEASUREMENTS_LOADED then reset-current-station-data reset-measurements state, action.measurements
-    case \FOCUS_SEARCH_INPUT then focus-search-input state
-    case \BLUR_SEARCH_INPUT then blur-search-input state
-    case \CHANGE_SEARCH_TEXT then reset-search-results change-search-text state, action.search-text
-    case \SELECT_STATION then select-station state, action.id
-    case \STATION_WEATHER_LOADED then station-weather-loaded state, action.weather
-    case \UNSELECT_STATION then unselect-station state
-    default state
+
+    case \STATIONS_LOADED
+      reset-stations state, action.stations
+        |> reset-search-results
+
+    case \MEASUREMENTS_LOADED
+      reset-measurements state, action.measurements
+        |> reset-current-station-data
+
+    case \SEARCHBOX_FOCUSED
+      focus-search-input state
+
+    case \SEARCHBOX_BLURRED
+      blur-search-input state
+
+    case \SEARCHBOX_TEXT_CHANGED
+      change-search-text state, action.search-text
+        |> reset-search-results
+
+    case \STATION_SELECTED
+      set-current-station-data state, action.id
+
+    case \STATION_WEATHER_LOADED
+      station-weather-loaded state, action.weather
+
+    case \STATION_UNSELECTED
+      unselect-station state
+
+    default
+      state
