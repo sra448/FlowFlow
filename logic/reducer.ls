@@ -14,7 +14,7 @@ initial-state = do
 stations-searcher = { search: -> [] }
 reset-fuzzy-searcher = (stations) ->
   stations-searcher := new Fuse stations, {
-    keys: ["name", "water_body_name"]
+    keys: ["name", "waterBodyName"]
     id: "id"
     distance: 0
     findAllMatches: true
@@ -71,7 +71,7 @@ reset-current-station-data = (state) ->
       selected-station: {
         id: id
         name: station.name
-        water-body-name: station.water_body_name
+        water-body-name: station.water-body-name
         measurements: state.measurements[id]
         weather: undefined
       }

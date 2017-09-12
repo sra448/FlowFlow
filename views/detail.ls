@@ -11,7 +11,7 @@ icons =
     Temperature: require "./icons/temperatur.svg"
   weather:
     sun: require "./icons/sun.svg"
-    sun_cloud: require "./icons/cloud-sun.svg"
+    sun-cloud: require "./icons/cloud-sun.svg"
     cloud: require "./icons/cloud.svg"
     rain: require "./icons/rain.svg"
 
@@ -37,10 +37,10 @@ header = ({ selected-station, on-back }) ->
     div {}, selected-station.water-body-name
 
 
-weather-box = ({ air_temp, indicator }) ->
+weather-box = ({ air-temp, indicator }) ->
   div { class-name: "infobox" },
     div {},
-      b {}, air_temp
+      b {}, air-temp
       div {},
         img { src: icons.weather[indicator] }
         div { class-name: "small" }, indicator
