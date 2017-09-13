@@ -7,7 +7,7 @@ backend-url = "https://waterbuddy.herokuapp.com/api"
 
 fetch-weather = (action$) ->
   action$
-    .of-type \SELECT_STATION
+    .of-type \STATION_SELECTED
     .switch-map ({ id }) ->
       Observable
         .ajax

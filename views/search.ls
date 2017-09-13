@@ -4,6 +4,7 @@
 { div, h1, input, ul, li, img, svg, path, strong } = DOM
 
 search-icon = require "./icons/search.svg"
+x-icon = require "./icons/x.svg"
 
 
 map-state-to-props = ({ search-text, search-results, input-has-focus }) ->
@@ -11,13 +12,15 @@ map-state-to-props = ({ search-text, search-results, input-has-focus }) ->
 
 map-dispatch-to-props = (dispatch) ->
   on-focus: ->
-    dispatch { type: \FOCUS_SEARCH_INPUT }
+    dispatch { type: \SEARCHBOX_FOCUSED }
   on-blur: ->
-    dispatch { type: \BLUR_SEARCH_INPUT }
+    dispatch { type: \SEARCHBOX_BLURRED }
+  on-clear: ({ target }) ->
+    dispatch { type: \SEARCHBOX_TEXT_CHANGED, search-text: "" }
   on-change: ({ target }) ->
-    dispatch { type: \CHANGE_SEARCH_TEXT, search-text: target.value }
+    dispatch { type: \SEARCHBOX_TEXT_CHANGED, search-text: target.value }
   on-select-station: (id) -> ->
-    dispatch { type: \SELECT_STATION, id }
+    dispatch { type: \STATION_SELECTED, id }
 
 
 wavey-line = ->
@@ -32,15 +35,21 @@ wavey-line = ->
 
 module.exports = do
   connect map-state-to-props, map-dispatch-to-props <|
-    ({ search-text, search-results, input-has-focus, on-change, on-select-station, on-focus, on-blur }) ->
+    ({ search-text, search-results, input-has-focus, on-change, on-select-station, on-focus, on-blur, on-clear }) ->
       show-as-condensed = input-has-focus || search-results.length > 0
 
       div { class-name: "search #{"condensed" if show-as-condensed}" },
         h1 {}, "FlowFlow"
         div { class-name: "textbox" },
           div {},
-            input { on-focus, on-change, on-blur, type: "search", value: search-text, placeholder: "River or Lake" }
-            img { src: search-icon }
+            input { on-focus, on-change, on-blur, type: "text", value: search-text, placeholder: "River or Lake" }
+
+            if search-text == ""
+              img { src: search-icon }
+            else
+              img { src: x-icon, on-click: on-clear }
+
+
           wavey-line {}
         ul {},
           for { id, name, water-body-name } in search-results
