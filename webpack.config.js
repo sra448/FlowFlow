@@ -1,11 +1,11 @@
 module.exports = {
   entry: {
-    "index": "./index.ls",
-    "service-worker": "./service-worker.ls",
+    "index": "./app/index.ls",
+    "service-worker": "./app/service-worker.ls",
   },
   output: {
     path: __dirname,
-    filename: "[name].js"
+    filename: "app/[name].js"
   },
   module: {
     loaders: [

@@ -7,7 +7,7 @@
 
 reducer = require "./logic/reducer.ls"
 epic = require "./logic/epic.ls"
-ui = require "./views/main.ls"
+ui = require "./components/main.ls"
 
 
 epic-middleware = create-epic-middleware epic
