@@ -22,8 +22,8 @@ icons =
 # React Redux Bindings
 
 
-map-state-to-props = ({ selected-station, starred-station-ids }) ->
-  is-starred = selected-station && selected-station.id in starred-station-ids
+map-state-to-props = ({ selected-station, starred-stations }) ->
+  is-starred = selected-station && selected-station.id in [id for {id} in starred-stations]
   { selected-station, is-starred }
 
 

@@ -9,7 +9,7 @@ initial-state = do
   input-has-focus: false
   search-results: []
   selected-station: undefined
-  starred-station-ids: []
+  starred-stations: []
 
 
 stations-searcher = { search: -> [] }
@@ -81,18 +81,19 @@ unselect-station = (state) ->
 
 
 toggle-station-star = (state, id) ->
-  if id in state.starred-station-ids
+  if id in [s.id for s in state.starred-stations]
     unstar-station state, id
   else
     star-station state, id
 
 
 star-station = (state, id) ->
-  { ...state, starred-station-ids: [...state.starred-station-ids, id] }
+  station = state.stations.find (s) -> s.id == id
+  { ...state, starred-stations: [...state.starred-stations, station] }
 
 
 unstar-station = (state, id) ->
-  { ...state, starred-station-ids: state.starred-station-ids.filter (x) -> x != id }
+  { ...state, starred-stations: state.starred-stations.filter (x) -> x.id != id }
 
 
 module.exports = (state = initial-state, action) ->

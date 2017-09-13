@@ -11,8 +11,8 @@ x-icon = require "./icons/x.svg"
 # React Redux Bindings
 
 
-map-state-to-props = ({ search-text, search-results, input-has-focus }) ->
-  { search-text, search-results, input-has-focus }
+map-state-to-props = ({ search-text, search-results, input-has-focus, starred-stations }) ->
+  { search-text, search-results, input-has-focus, starred-stations }
 
 
 map-dispatch-to-props = (dispatch) ->
@@ -66,7 +66,7 @@ result-list = ({ search-results, on-select-station }) ->
 
 
 main = (props) ->
-  { on-change, on-focus, on-blur, on-clear } = props
+  { on-change, on-focus, on-blur, on-clear, starred-stations } = props
   { search-text, search-results, input-has-focus, on-select-station } = props
   show-as-condensed = input-has-focus || search-results.length > 0
   class-name = "search #{"condensed" if show-as-condensed}"
@@ -76,7 +76,15 @@ main = (props) ->
     h1 {}, \FlowFlow
     search-box { value: search-text, on-focus, on-change, on-blur, on-clear }
     wave {}
-    result-list { search-results, on-select-station }
+
+    if search-results.length > 0
+      result-list { search-results, on-select-station }
+    else
+      div {},
+        for { water-body-name, name } in starred-stations
+          div { class-name: "infobox" },
+            div {}, "#{water-body-name}, #{name}"
+
 
 
 # Connected Main Component
