@@ -12,7 +12,7 @@ ui = require "./views/main.ls"
 
 epic-middleware = create-epic-middleware epic
 store = create-store reducer, apply-middleware epic-middleware
-app = create-element Provider, { store }, ui {}
+app = create-element Provider, { store }, (create-element ui, {})
 
 
 render app, document.get-element-by-id \agua
