@@ -39,6 +39,7 @@ module.exports = do
       show-as-condensed = input-has-focus || search-results.length > 0
 
       div { class-name: "search #{"condensed" if show-as-condensed}" },
+        div { class-name: "spacer" } if window.navigator.standalone
         h1 {}, "FlowFlow"
         div { class-name: "textbox" },
           div {},
