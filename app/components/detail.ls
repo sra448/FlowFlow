@@ -18,6 +18,10 @@ icons =
     rain: require "./icons/rain.svg"
 
 
+
+# React Redux Bindings
+
+
 map-state-to-props = ({ selected-station, starred-station-ids }) ->
   is-starred = selected-station && selected-station.id in starred-station-ids
   { selected-station, is-starred }
@@ -30,8 +34,8 @@ map-dispatch-to-props = (dispatch) ->
     dispatch { type: \STATION_STAR_TOGGLED, id }
 
 
-random-between = (a, b) ->
-  Math.floor (Math.random() * (b - a)) + a
+
+# Components
 
 
 header = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
@@ -64,26 +68,30 @@ measurement-box = ({ measurement-type, value, unit }) ->
         div {}, unit
 
 
-module.exports = do
-  connect map-state-to-props, map-dispatch-to-props <|
-    ({ selected-station, is-starred, on-back, on-toggle-star }) ->
-      if !selected-station
-        div {}
-      else
-        sync-date = new Date selected-station.measurements[0].datetime
 
-        div { class-name: "detail" },
-          div { class-name: "spacer" } if window.navigator.standalone
-            
-          header { selected-station, on-back, on-toggle-star, is-starred }
+# Main Component
 
-          div { class-name: "infos" },
-            for m in selected-station.measurements
-              div {key: m.measurement-type},
-                measurement-box { ...m, key: m.measurement-type }
 
-            if selected-station.weather
-              weather-box selected-station.weather
+main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
+  sync-date = new Date selected-station.measurements[0].datetime
 
-            div { class-name: "small" },
-              sync-date.toLocaleString()
+  div { class-name: "detail" },
+    div { class-name: "spacer" } if window.navigator.standalone
+    header { selected-station, on-back, on-toggle-star, is-starred }
+    div { class-name: "infos" },
+      for m in selected-station.measurements
+        div {key: m.measurement-type},
+          measurement-box { ...m, key: m.measurement-type }
+
+      if selected-station.weather
+        weather-box selected-station.weather
+
+      div { class-name: "small" },
+        sync-date.toLocaleString()
+
+
+
+# Connected Component
+
+
+module.exports = main |> connect map-state-to-props, map-dispatch-to-props

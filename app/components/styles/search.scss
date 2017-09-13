@@ -12,6 +12,15 @@
     opacity: 0;
   }
 
+  .wave {
+    margin: 0 20px;
+
+    > svg {
+      height: 18px;
+      width: 100%;
+    }
+  }
+
   .textbox {
     position: relative;
     padding: 0 20px;
