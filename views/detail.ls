@@ -73,6 +73,8 @@ module.exports = do
         sync-date = new Date selected-station.measurements[0].datetime
 
         div { class-name: "detail" },
+          div { class-name: "spacer" } if window.navigator.standalone
+            
           header { selected-station, on-back, on-toggle-star, is-starred }
 
           div { class-name: "infos" },
