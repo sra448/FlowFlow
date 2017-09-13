@@ -4,5 +4,11 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#00b8e0",
-  "description": "Wanna go to the rivers?"
+  "theme_color": "#00b8e0",
+  "description": "Dip it real good",
+  "icons": [{
+    "src": "resources/icon-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }]
 }
