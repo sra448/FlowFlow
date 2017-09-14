@@ -1,4 +1,4 @@
-PRECACHE = 'flowflow-v1.0.8'
+PRECACHE = 'flowflow-v1.0.9'
 RUNTIME = "prod"
 
 PRECACHE_URLS = [
@@ -20,27 +20,22 @@ self.addEventListener "activate", (event) ->
   event.wait-until do
     caches
       .keys()
-      .then (cacheNames) ->
-        cacheNames.filter (cacheName) -> !current-caches.includes cacheName
+      .then (cache-names) ->
+        cache-names.filter (cache-name) -> !current-caches.includes cache-name
       .then (caches-to-delete) ->
-        Promise.all caches-to-delete.map (caches-to-delete) ->
-          caches.delete caches-to-delete
+        Promise.all [caches.delete cache for cache in caches-to-delete]
       .then -> self.clients.claim()
 
 
 self.addEventListener 'fetch', (event) ->
-  console.log "fetch"
   event.respond-with do
     (caches.match event.request).then (cached-response) ->
       if cached-response
-        console.log "this is cached"
         cached-response
       else
         caches.open RUNTIME
           .then (cache) ->
             fetch event.request
               .then (response) ->
-                # Put a copy of the response in the runtime cache.
-                console.log "put that ting in the cache"
                 cache.put event.request, response.clone()
                   .then -> response

@@ -22,8 +22,8 @@ icons =
 # React Redux Bindings
 
 
-map-state-to-props = ({ selected-station, starred-station-ids }) ->
-  is-starred = selected-station && selected-station.id in starred-station-ids
+map-state-to-props = ({ selected-station, starred-stations }) ->
+  is-starred = selected-station && selected-station.id in [id for {id} in starred-stations]
   { selected-station, is-starred }
 
 
@@ -73,7 +73,7 @@ measurement-box = ({ measurement-type, value, unit }) ->
 
 
 main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
-  sync-date = new Date selected-station.measurements[0].datetime
+  sync-date = new Date selected-station.measurements[0]?.datetime
 
   div { class-name: "detail" },
     div { class-name: "spacer" } if window.navigator.standalone
@@ -86,8 +86,9 @@ main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
       if selected-station.weather
         weather-box selected-station.weather
 
-      div { class-name: "small" },
-        sync-date.toLocaleString()
+      if sync-date?
+        div { class-name: "small" },
+          sync-date.toLocaleString()
 
 
 
