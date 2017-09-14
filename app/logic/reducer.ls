@@ -1,15 +1,7 @@
 Fuse = require "fuse.js"
-{ obj-to-pairs, map } = require "prelude-ls"
 
 
-initial-state = do
-  stations: []
-  measurements: []
-  search-text: ""
-  input-has-focus: false
-  search-results: []
-  selected-station: undefined
-  starred-stations: []
+# Helper Functions
 
 
 stations-searcher = { search: -> [] }
@@ -29,7 +21,12 @@ reset-stations = (state, stations) ->
   { ...state, stations }
 
 
+find-station = (stations, id) ->
+  stations.find (s) -> s.id == id
+
+
 reset-measurements = (state, measurements) ->
+  console.log "reset-measurements", measurements
   { ...state, measurements }
 
 
@@ -59,16 +56,15 @@ reset-current-station-data = (state) ->
 
 
 set-current-station-data = (state, id) ->
-  station = state.stations.find (s) -> s.id == id
+  { ...state, selected-station: enhanced-station-data state, id }
+
+
+enhanced-station-data = (state, id) ->
+  station = find-station state.stations, id
   {
-    ...state
-    selected-station: {
-      id: id
-      name: station.name
-      water-body-name: station.water-body-name
-      measurements: state.measurements[id]
-      weather: undefined
-    }
+    ...station,
+    measurements: state.measurements[id] || []
+    weather: undefined
   }
 
 
@@ -88,7 +84,7 @@ toggle-station-star = (state, id) ->
 
 
 star-station = (state, id) ->
-  station = state.stations.find (s) -> s.id == id
+  station = find-station state.stations, id
   { ...state, starred-stations: [...state.starred-stations, station] }
 
 
@@ -96,7 +92,33 @@ unstar-station = (state, id) ->
   { ...state, starred-stations: state.starred-stations.filter (x) -> x.id != id }
 
 
+persist-starred-station-ids = (state) ->
+  local-storage.set-item \starred-station-ids, [id for { id } in state.starred-stations]
+  state
+
+
+reset-starred-stations-data = (state) ->
+  ids = local-storage.get-item \starred-station-ids
+  { ...state, starred-stations: [enhanced-station-data state, id for id in ids || []] }
+
+
+
+# Reducer
+
+
+initial-state = do
+  stations: []
+  measurements: []
+  search-text: ""
+  input-has-focus: false
+  search-results: []
+  selected-station: undefined
+  starred-stations: []
+
+
 module.exports = (state = initial-state, action) ->
+  console.log action.type, state
+
   switch action.type
 
     case \STATIONS_LOADED
@@ -106,6 +128,7 @@ module.exports = (state = initial-state, action) ->
     case \MEASUREMENTS_LOADED
       reset-measurements state, action.measurements
         |> reset-current-station-data
+        |> reset-starred-stations-data
 
     case \SEARCHBOX_FOCUSED
       focus-search-input state
@@ -128,6 +151,7 @@ module.exports = (state = initial-state, action) ->
 
     case \STATION_STAR_TOGGLED
       toggle-station-star state, action.id
+        |> persist-starred-station-ids
 
     default
       state
