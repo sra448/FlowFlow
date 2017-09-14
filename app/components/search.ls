@@ -82,7 +82,7 @@ main = (props) ->
     else
       div {},
         for { water-body-name, name } in starred-stations
-          div { class-name: "infobox" },
+          div { key: name, class-name: "infobox" },
             div {}, "#{water-body-name}, #{name}"
 
 

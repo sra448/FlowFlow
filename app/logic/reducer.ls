@@ -93,12 +93,13 @@ unstar-station = (state, id) ->
 
 
 persist-starred-station-ids = (state) ->
-  local-storage.set-item \starred-station-ids, [id for { id } in state.starred-stations]
+  ids = [id for { id } in state.starred-stations]
+  local-storage.set-item \starred-station-ids, JSON.stringify ids
   state
 
 
 reset-starred-stations-data = (state) ->
-  ids = local-storage.get-item \starred-station-ids
+  ids = JSON.parse local-storage.get-item \starred-station-ids
   { ...state, starred-stations: [enhanced-station-data state, id for id in ids || []] }
 
 
