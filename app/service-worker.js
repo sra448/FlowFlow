@@ -63,16 +63,16 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 203);
+/******/ 	return __webpack_require__(__webpack_require__.s = 202);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 203:
+/***/ 202:
 /***/ (function(module, exports) {
 
 var PRECACHE, RUNTIME, PRECACHE_URLS;
-PRECACHE = 'flowflow-v1.0.8';
+PRECACHE = 'flowflow-v1.0.9';
 RUNTIME = "prod";
 PRECACHE_URLS = ["index.html", "index.js", "https://fonts.googleapis.com/css?family=Lobster+Two:400,700i"];
 self.addEventListener("install", function(event){
@@ -88,23 +88,26 @@ self.addEventListener("activate", function(event){
       return !currentCaches.includes(cacheName);
     });
   }).then(function(cachesToDelete){
-    return Promise.all(cachesToDelete.map(function(cachesToDelete){
-      return caches['delete'](cachesToDelete);
-    }));
+    var cache;
+    return Promise.all((function(){
+      var i$, ref$, len$, results$ = [];
+      for (i$ = 0, len$ = (ref$ = cachesToDelete).length; i$ < len$; ++i$) {
+        cache = ref$[i$];
+        results$.push(caches['delete'](cache));
+      }
+      return results$;
+    }()));
   }).then(function(){
     return self.clients.claim();
   }));
 });
 self.addEventListener('fetch', function(event){
-  console.log("fetch");
   return event.respondWith(caches.match(event.request).then(function(cachedResponse){
     if (cachedResponse) {
-      console.log("this is cached");
       return cachedResponse;
     } else {
       return caches.open(RUNTIME).then(function(cache){
         return fetch(event.request).then(function(response){
-          console.log("put that ting in the cache");
           return cache.put(event.request, response.clone()).then(function(){
             return response;
           });
