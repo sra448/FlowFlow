@@ -52,13 +52,13 @@ header = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
 
 measurement-box = ({ name, current, unit, history }) ->
   div { class-name: "infobox" },
-    history-chart { history } if history
     div { class-name: "current" },
       b {}, current.value
       div {},
         img { src: icons.type[name] }
         div { class-name: "small" }, name
         div {}, unit
+    history-chart { history } if history
 
 
 history-chart = ({ history }) ->
@@ -87,7 +87,7 @@ weather-box = ({ air-temp, indicator }) ->
 # Main Component
 
 
-main = ({ selected-station, last-sync-date, is-starred, on-back, on-toggle-star }) ->
+main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
   div { class-name: "detail" },
     div { class-name: "spacer" } if window.navigator.standalone
     header { selected-station, on-back, on-toggle-star, is-starred }
@@ -100,9 +100,9 @@ main = ({ selected-station, last-sync-date, is-starred, on-back, on-toggle-star 
       if selected-station.weather
         weather-box selected-station.weather
 
-      if last-sync-date?
+      if selected-station.last-sync-date?
         div { class-name: "small" },
-          last-sync-date.toLocaleString()
+          selected-station.last-sync-date.toLocaleString()
 
 
 
