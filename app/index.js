@@ -40530,7 +40530,7 @@ exports = module.exports = __webpack_require__(146)(undefined);
 
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box;\n  font-family: sans-serif;\n  padding: 0;\n  margin: 0; }\n\nhtml, body {\n  height: 100%;\n  width: 100%;\n  color: white; }\n\nbody {\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);\n  background-attachment: fixed;\n  text-align: center; }\n\nh1 {\n  margin: auto;\n  margin-top: 25px;\n  margin-bottom: 30px;\n  font-weight: 700;\n  font-family: 'Lobster Two', cursive;\n  transition: all .1s ease-out; }\n\n::-webkit-input-placeholder {\n  /* Chrome/Opera/Safari */\n  color: rgba(255, 255, 255, 0.6);\n  font-weight: normal; }\n\n::-moz-placeholder {\n  /* Firefox 19+ */\n  color: rgba(255, 255, 255, 0.6);\n  font-weight: normal; }\n\n:-ms-input-placeholder {\n  /* IE 10+ */\n  color: rgba(255, 255, 255, 0.6);\n  font-weight: normal; }\n\n:-moz-placeholder {\n  /* Firefox 18- */\n  color: rgba(255, 255, 255, 0.6);\n  font-weight: normal; }\n\n#agua, .main, .search {\n  height: 100%; }\n\n.spacer {\n  height: 20px; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box;\n  font-family: sans-serif;\n  padding: 0;\n  margin: 0; }\n\nhtml, body {\n  height: 100%;\n  width: 100%;\n  color: white;\n  text-shadow: rgba(22, 71, 140, 0.2) 1px 0 4px; }\n\nbody {\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);\n  background-attachment: fixed;\n  text-align: center; }\n\nh1 {\n  margin: auto;\n  margin-top: 25px;\n  margin-bottom: 30px;\n  font-weight: 700;\n  font-family: 'Lobster Two', cursive;\n  transition: all .1s ease-out; }\n\n::-webkit-input-placeholder {\n  /* Chrome/Opera/Safari */\n  color: rgba(255, 255, 255, 0.6);\n  font-weight: normal; }\n\n::-moz-placeholder {\n  /* Firefox 19+ */\n  color: rgba(255, 255, 255, 0.6);\n  font-weight: normal; }\n\n:-ms-input-placeholder {\n  /* IE 10+ */\n  color: rgba(255, 255, 255, 0.6);\n  font-weight: normal; }\n\n:-moz-placeholder {\n  /* Firefox 18- */\n  color: rgba(255, 255, 255, 0.6);\n  font-weight: normal; }\n\n#agua, .main, .search {\n  height: 100%; }\n\n.spacer {\n  height: 20px; }\n", ""]);
 
 // exports
 
@@ -40544,7 +40544,7 @@ exports = module.exports = __webpack_require__(146)(undefined);
 
 
 // module
-exports.push([module.i, ".detail {\n  display: flex;\n  flex-flow: column;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding-top: 10px;\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);\n  background-attachment: fixed; }\n  .detail .station-name {\n    font-size: 0.7em;\n    margin-bottom: 4px; }\n  .detail .small {\n    font-size: 0.8em; }\n  .detail .header {\n    display: flex;\n    position: relative;\n    height: 40px;\n    margin-bottom: 20px;\n    font-size: 22px;\n    letter-spacing: 1.2; }\n    .detail .header > div {\n      flex: 1 1; }\n    .detail .header a {\n      flex: 0 0 16%; }\n      .detail .header a img {\n        margin-top: 5px;\n        height: 22px;\n        width: 22px; }\n  .detail .history {\n    position: absolute;\n    opacity: 0.5; }\n  .detail .infos {\n    overflow-y: scroll;\n    -webkit-overflow-scrolling: touch;\n    padding-bottom: 20px; }\n  .detail .infobox {\n    display: flex;\n    flex-flow: column;\n    margin: 16px 0;\n    background: rgba(58, 123, 213, 0.31); }\n    .detail .infobox > div {\n      width: 100%;\n      margin: auto;\n      padding: 20px 0;\n      display: flex; }\n      .detail .infobox > div > b {\n        flex: 0 0 50%;\n        width: 60%;\n        font-weight: bold;\n        font-size: 62px;\n        text-align: right; }\n      .detail .infobox > div > div {\n        flex: 1 1;\n        display: flex;\n        flex-direction: column; }\n    .detail .infobox img {\n      margin: 10px auto;\n      max-width: 50px; }\n", ""]);
+exports.push([module.i, ".detail {\n  display: flex;\n  flex-flow: column;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding-top: 10px;\n  background: #3a7bd5;\n  background: linear-gradient(to bottom, #00b8e0, #3a7bd5);\n  background-attachment: fixed; }\n  .detail .station-name {\n    font-size: 0.7em;\n    margin-bottom: 4px; }\n  .detail .small {\n    font-size: 0.8em; }\n  .detail .header {\n    display: flex;\n    position: relative;\n    height: 40px;\n    margin-bottom: 20px;\n    font-size: 22px;\n    letter-spacing: 1.2; }\n    .detail .header > div {\n      flex: 1 1; }\n    .detail .header a {\n      flex: 0 0 16%; }\n      .detail .header a img {\n        margin-top: 5px;\n        height: 22px;\n        width: 22px; }\n  .detail .history {\n    position: absolute;\n    opacity: 0.5; }\n  .detail .infos {\n    overflow-y: scroll;\n    -webkit-overflow-scrolling: touch;\n    padding-bottom: 20px; }\n  .detail .infobox {\n    position: relative;\n    display: flex;\n    flex-flow: column;\n    margin: 16px 0;\n    background: rgba(58, 123, 213, 0.31); }\n    .detail .infobox > div {\n      width: 100%;\n      margin: auto;\n      padding: 20px 0;\n      display: flex; }\n      .detail .infobox > div > b {\n        flex: 0 0 50%;\n        width: 60%;\n        font-weight: bold;\n        font-size: 62px;\n        text-align: right; }\n      .detail .infobox > div > div {\n        flex: 1 1;\n        display: flex;\n        flex-direction: column; }\n    .detail .infobox img {\n      margin: 10px auto;\n      max-width: 50px; }\n", ""]);
 
 // exports
 
@@ -46950,15 +46950,15 @@ measurementBox = function(arg$){
   name = arg$.name, current = arg$.current, unit = arg$.unit, history = arg$.history;
   return div({
     className: "infobox"
-  }, history ? historyChart({
-    history: history
-  }) : void 8, div({
+  }, div({
     className: "current"
   }, b({}, current.value), div({}, img({
     src: icons.type[name]
   }), div({
     className: "small"
-  }, name), div({}, unit))));
+  }, name), div({}, unit))), history ? historyChart({
+    history: history
+  }) : void 8);
 };
 historyChart = function(arg$){
   var history, data, res$, i$, len$, h, ref$;
@@ -47011,8 +47011,8 @@ weatherBox = function(arg$){
   }, indicator))));
 };
 main = function(arg$){
-  var selectedStation, lastSyncDate, isStarred, onBack, onToggleStar, sensor;
-  selectedStation = arg$.selectedStation, lastSyncDate = arg$.lastSyncDate, isStarred = arg$.isStarred, onBack = arg$.onBack, onToggleStar = arg$.onToggleStar;
+  var selectedStation, isStarred, onBack, onToggleStar, sensor;
+  selectedStation = arg$.selectedStation, isStarred = arg$.isStarred, onBack = arg$.onBack, onToggleStar = arg$.onToggleStar;
   return div({
     className: "detail"
   }, window.navigator.standalone ? div({
@@ -47033,9 +47033,9 @@ main = function(arg$){
       }, measurementBox((import$({}, sensor)))));
     }
     return results$;
-  }()), selectedStation.weather ? weatherBox(selectedStation.weather) : void 8, lastSyncDate != null ? div({
+  }()), selectedStation.weather ? weatherBox(selectedStation.weather) : void 8, selectedStation.lastSyncDate != null ? div({
     className: "small"
-  }, lastSyncDate.toLocaleString()) : void 8));
+  }, selectedStation.lastSyncDate.toLocaleString()) : void 8));
 };
 module.exports = connect(mapStateToProps, mapDispatchToProps)(
 main);
