@@ -46,6 +46,15 @@
     }
   }
 
+  .current {
+    // margin-top: -110px;
+  }
+
+  .history {
+    position: absolute;
+    opacity: 0.5;
+  }
+
   .infos {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
@@ -54,11 +63,12 @@
 
   .infobox {
     display: flex;
+    flex-flow: column;
     margin: 16px 0;
     background: rgba(58, 123, 213, 0.31);
 
     > div {
-      width: 76%;
+      width: 100%;
       margin: auto;
       padding: 20px 0;
       display: flex;
