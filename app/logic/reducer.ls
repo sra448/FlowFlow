@@ -1,3 +1,4 @@
+{ pairs-to-obj } = require \prelude-ls
 Fuse = require "fuse.js"
 
 
@@ -26,7 +27,6 @@ find-station = (stations, id) ->
 
 
 reset-measurements = (state, measurements) ->
-  console.log "reset-measurements", measurements
   { ...state, measurements }
 
 
@@ -60,16 +60,30 @@ set-current-station-data = (state, id) ->
 
 
 enhanced-station-data = (state, id) ->
+  measure-type-map = do
+    Discharge: \discharges
+    SeaLevel: \sea-levels
+    Temperature: \temperatures
+
   station = find-station state.stations, id
-  {
-    ...station,
-    measurements: state.measurements[id] || []
-    weather: undefined
-  }
+  measurements = state.measurements[id] || []
+  last-sync-date = new Date measurements[0]? && new Date measurements[0].datetime
+  sensors = do
+    [{ name:measure-type-map[m.measurement-type], unit: m.unit, current: m } for m in measurements]
+
+  { ...station, last-sync-date, sensors, weather: undefined }
 
 
 station-weather-loaded = (state, weather) ->
   { ...state, selected-station: { ...state.selected-station, weather } }
+
+
+station-history-loaded = (state, history) ->
+  if !state.selected-station?
+    state
+  else
+    sensors = [{ ...sensor, history: history[sensor.name] } for sensor in state.selected-station.sensors]
+    { ...state, selected-station: { ...state.selected-station, sensors } }
 
 
 unselect-station = (state) ->
@@ -93,12 +107,13 @@ unstar-station = (state, id) ->
 
 
 persist-starred-station-ids = (state) ->
-  local-storage.set-item \starred-station-ids, [id for { id } in state.starred-stations]
+  ids = [id for { id } in state.starred-stations]
+  local-storage.set-item \starred-station-ids, JSON.stringify ids
   state
 
 
 reset-starred-stations-data = (state) ->
-  ids = local-storage.get-item \starred-station-ids
+  ids = JSON.parse local-storage.get-item \starred-station-ids
   { ...state, starred-stations: [enhanced-station-data state, id for id in ids || []] }
 
 
@@ -145,6 +160,9 @@ module.exports = (state = initial-state, action) ->
 
     case \STATION_WEATHER_LOADED
       station-weather-loaded state, action.weather
+
+    case \STATION_HISTORY_LOADED
+      station-history-loaded state, action.history
 
     case \STATION_UNSELECTED
       unselect-station state

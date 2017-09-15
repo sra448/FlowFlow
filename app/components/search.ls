@@ -62,6 +62,14 @@ result-list = ({ search-results, on-select-station }) ->
 
 
 
+starred-stations-list = ({ starred-stations, on-select-station }) ->
+  div { class-name: "starred-stations" },
+    for { id, water-body-name, name } in starred-stations
+      div { key: name, on-click: on-select-station id },
+        "#{water-body-name}, #{name}"
+
+
+
 # Main Component
 
 
@@ -80,10 +88,7 @@ main = (props) ->
     if search-results.length > 0
       result-list { search-results, on-select-station }
     else
-      div {},
-        for { water-body-name, name } in starred-stations
-          div { class-name: "infobox" },
-            div {}, "#{water-body-name}, #{name}"
+      starred-stations-list { starred-stations, on-select-station }
 
 
 

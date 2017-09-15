@@ -1,6 +1,7 @@
 { connect } = require \react-redux
 { create-element, DOM } = require \react
-{ div, a, b, img, h1, strong } = DOM
+{ AreaChart, XAxis, YAxis, Area, Line } = require \recharts
+{ div, a, b, img, h1, strong, linear-gradient, defs, stop } = DOM
 
 
 icons =
@@ -8,12 +9,12 @@ icons =
   star: require "./icons/star.svg"
   star-empty: require "./icons/star-empty.svg"
   type:
-    Discharge: require "./icons/drain.svg"
-    SeaLevel: require "./icons/level.svg"
-    Temperature: require "./icons/temperatur.svg"
+    discharges: require "./icons/drain.svg"
+    sealevels: require "./icons/level.svg"
+    temperatures: require "./icons/temperatur.svg"
   weather:
     sun: require "./icons/sun.svg"
-    sun-cloud: require "./icons/cloud-sun.svg"
+    sun_cloud: require "./icons/cloud-sun.svg"
     cloud: require "./icons/cloud.svg"
     rain: require "./icons/rain.svg"
 
@@ -49,6 +50,30 @@ header = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
       img { src: if is-starred then icons.star else icons.star-empty }
 
 
+measurement-box = ({ name, current, unit, history }) ->
+  div { class-name: "infobox" },
+    history-chart { history } if history
+    div { class-name: "current" },
+      b {}, current.value
+      div {},
+        img { src: icons.type[name] }
+        div { class-name: "small" }, name
+        div {}, unit
+
+
+history-chart = ({ history }) ->
+  data = [{ ...h, date: +new Date h.datetime } for h in history]
+  div { class-name: "history" },
+    create-element AreaChart, { data, width: 400, height: 100 },
+      defs {},
+        linear-gradient { id:"gradient", x1:"0", y1:"0", x2:"0", y2:"1" },
+          stop { offset: "5%", stop-color: "\#82e0f5", stop-opacity: 0.3 }
+          stop { offset: "90%", stop-color: "\#82e0f5", stop-opacity: 0 }
+      # create-element YAxis, {}
+      create-element Line, { data-key: "weeklyAverage", stroke: "blue" }
+      create-element Area, { data-key: "value", stroke: "white", fill-opacity: 1, fill: "url(\#gradient)" }
+
+
 weather-box = ({ air-temp, indicator }) ->
   div { class-name: "infobox" },
     div {},
@@ -58,37 +83,26 @@ weather-box = ({ air-temp, indicator }) ->
         div { class-name: "small" }, indicator
 
 
-measurement-box = ({ measurement-type, value, unit }) ->
-  div { class-name: "infobox" },
-    div {},
-      b {}, value
-      div {},
-        img { src: icons.type[measurement-type] }
-        div { class-name: "small" }, measurement-type
-        div {}, unit
-
-
 
 # Main Component
 
 
-main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
-  sync-date = new Date selected-station.measurements[0]?.datetime
-
+main = ({ selected-station, last-sync-date, is-starred, on-back, on-toggle-star }) ->
   div { class-name: "detail" },
     div { class-name: "spacer" } if window.navigator.standalone
     header { selected-station, on-back, on-toggle-star, is-starred }
+
     div { class-name: "infos" },
-      for m in selected-station.measurements
-        div {key: m.measurement-type},
-          measurement-box { ...m, key: m.measurement-type }
+      for sensor in selected-station.sensors
+        div { key: sensor.name },
+          measurement-box { ...sensor }
 
       if selected-station.weather
         weather-box selected-station.weather
 
-      if sync-date?
+      if last-sync-date?
         div { class-name: "small" },
-          sync-date.toLocaleString()
+          last-sync-date.toLocaleString()
 
 
 

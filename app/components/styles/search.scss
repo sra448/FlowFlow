@@ -21,6 +21,15 @@
     }
   }
 
+  .starred-stations {
+    margin-top: 20px;
+
+    > div {
+      padding: 6px 0;
+      cursor: pointer;
+    }
+  }
+
   .textbox {
     position: relative;
     padding: 0 20px;

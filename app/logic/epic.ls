@@ -17,4 +17,16 @@ fetch-weather = (action$) ->
           { type: \STATION_WEATHER_LOADED, weather: response }
 
 
-module.exports = fetch-weather
+fetch-history = (action$) ->
+  action$
+    .of-type \STATION_SELECTED
+    .switch-map ({ id }) ->
+      Observable
+        .ajax
+        .get "#{backend-url}/station/#{id}/history"
+        .retry 5
+        .map ({ response }) ->
+          { type: \STATION_HISTORY_LOADED, history: response }
+
+
+module.exports = combine-epics fetch-weather, fetch-history
