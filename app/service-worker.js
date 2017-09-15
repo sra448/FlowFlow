@@ -63,16 +63,16 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 202);
+/******/ 	return __webpack_require__(__webpack_require__.s = 546);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 202:
+/***/ 546:
 /***/ (function(module, exports) {
 
 var PRECACHE, RUNTIME, PRECACHE_URLS;
-PRECACHE = 'flowflow-v1.0.9';
+PRECACHE = 'flowflow-v1.0.12';
 RUNTIME = "prod";
 PRECACHE_URLS = ["index.html", "index.js", "https://fonts.googleapis.com/css?family=Lobster+Two:400,700i"];
 self.addEventListener("install", function(event){
