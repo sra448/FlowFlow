@@ -1,6 +1,6 @@
 { connect } = require \react-redux
 { create-element, DOM } = require \react
-{ AreaChart, XAxis, YAxis, Area, Line } = require \recharts
+{ ComposedChart, XAxis, YAxis, Area, Line } = require \recharts
 { div, a, b, img, h1, strong, linear-gradient, defs, stop } = DOM
 
 
@@ -63,14 +63,15 @@ measurement-box = ({ name, current, unit, history }) ->
 
 history-chart = ({ history }) ->
   data = [{ ...h, date: +new Date h.datetime } for h in history]
+  width = (document.get-elements-by-class-name "infobox")[0]?.offset-width
+
   div { class-name: "history" },
-    create-element AreaChart, { data, width: 400, height: 100 },
+    create-element ComposedChart, { data, width, height: 100, margin: { left: 0, right: 0 } },
       defs {},
         linear-gradient { id:"gradient", x1:"0", y1:"0", x2:"0", y2:"1" },
           stop { offset: "5%", stop-color: "\#82e0f5", stop-opacity: 0.3 }
           stop { offset: "90%", stop-color: "\#82e0f5", stop-opacity: 0 }
-      # create-element YAxis, {}
-      create-element Line, { data-key: "weeklyAverage", stroke: "blue" }
+      # create-element Line, { data-key: "weeklyAverage", stroke: "blue" }
       create-element Area, { data-key: "value", stroke: "white", fill-opacity: 1, fill: "url(\#gradient)" }
 
 
@@ -87,13 +88,19 @@ weather-box = ({ air-temp, indicator }) ->
 # Main Component
 
 
+find-sensor = (sensors, sensor-name) ->
+  sensors.find ({ name }) -> name == sensor-name
+
+
 main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
+  sensors = [find-sensor selected-station.sensors, name for name in [\discharges, \temperatures]]
+
   div { class-name: "detail" },
     div { class-name: "spacer" } if window.navigator.standalone
     header { selected-station, on-back, on-toggle-star, is-starred }
 
     div { class-name: "infos" },
-      for sensor in selected-station.sensors
+      for sensor in sensors when sensor?
         div { key: sensor.name },
           measurement-box { ...sensor }
 
