@@ -38889,39 +38889,88 @@ main);
 /* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Observable, combineEpics, backendUrl, fetchWeather, fetchHistory;
+var Observable, combineEpics, backendUrl, get, fetchStations, fetchMeasurements, backButtonTriggered, fetchWeather, fetchHistory;
 Observable = __webpack_require__(814).Observable;
 combineEpics = __webpack_require__(210).combineEpics;
 backendUrl = "https://waterbuddy.herokuapp.com/api";
+get = function(urlFragment){
+  return Observable.ajax.get(backendUrl + "/" + urlFragment).retry(5);
+};
+fetchStations = function(action$){
+  return action$.ofType('APP_LOADED').switchMap(function(arg$){
+    var id;
+    id = arg$.id;
+    return get("stations");
+  }).map(function(arg$){
+    var response;
+    response = arg$.response;
+    return {
+      type: 'STATIONS_LOADED',
+      stations: response
+    };
+  });
+};
+fetchMeasurements = function(action$){
+  return action$.ofType('APP_LOADED').switchMap(function(arg$){
+    var id;
+    id = arg$.id;
+    return get("measurements");
+  }).map(function(arg$){
+    var response;
+    response = arg$.response;
+    return {
+      type: 'MEASUREMENTS_LOADED',
+      measurements: response
+    };
+  });
+};
+backButtonTriggered = function(action$){
+  return action$.ofType('APP_LOADED').switchMap(function(){
+    var register, unregister;
+    register = function(h){
+      return window.onpopstate = h;
+    };
+    unregister = function(){
+      return window.onpopstate = undefined;
+    };
+    return Observable.fromEventPattern(register, unregister).map(function(arg$){
+      var state;
+      state = arg$.state;
+      return {
+        type: 'STATION_UNSELECTED'
+      };
+    });
+  });
+};
 fetchWeather = function(action$){
   return action$.ofType('STATION_SELECTED').switchMap(function(arg$){
     var id;
     id = arg$.id;
-    return Observable.ajax.get(backendUrl + "/station/" + id + "/weather").retry(5).map(function(arg$){
-      var response;
-      response = arg$.response;
-      return {
-        type: 'STATION_WEATHER_LOADED',
-        weather: response
-      };
-    });
+    return get("station/" + id + "/weather");
+  }).map(function(arg$){
+    var response;
+    response = arg$.response;
+    return {
+      type: 'STATION_WEATHER_LOADED',
+      weather: response
+    };
   });
 };
 fetchHistory = function(action$){
   return action$.ofType('STATION_SELECTED').switchMap(function(arg$){
     var id;
     id = arg$.id;
-    return Observable.ajax.get(backendUrl + "/station/" + id + "/history").retry(5).map(function(arg$){
-      var response;
-      response = arg$.response;
-      return {
-        type: 'STATION_HISTORY_LOADED',
-        history: response
-      };
-    });
+    return get("station/" + id + "/history");
+  }).map(function(arg$){
+    var response;
+    response = arg$.response;
+    return {
+      type: 'STATION_HISTORY_LOADED',
+      history: response
+    };
   });
 };
-module.exports = combineEpics(fetchWeather, fetchHistory);
+module.exports = combineEpics(backButtonTriggered, fetchWeather, fetchHistory, fetchStations, fetchMeasurements);
 //# sourceMappingURL=/Users/flo/Projects/agua/node_modules/livescript-loader/index.js!/Users/flo/Projects/agua/app/logic/epic.ls.map
 
 
@@ -38982,14 +39031,15 @@ resetSearchResults = function(state){
   return ref$ = {}, import$(ref$, state), ref$.searchResults = searchResults, ref$;
 };
 resetCurrentStationData = function(state){
-  if (state.selectedStation) {
-    return setCurrentStationData(state, state.selectedStation.id);
-  } else {
+  if (!state.selectedStation) {
     return state;
+  } else {
+    return setCurrentStationData(state, state.selectedStation.id);
   }
 };
 setCurrentStationData = function(state, id){
   var ref$;
+  history.pushState({}, id, "#station/" + id);
   return ref$ = {}, import$(ref$, state), ref$.selectedStation = enhancedStationData(state, id), ref$;
 };
 enhancedStationData = function(state, id){
@@ -39034,6 +39084,7 @@ stationHistoryLoaded = function(state, history){
 };
 unselectStation = function(state){
   var ref$;
+  history.replaceState({}, "FlowFlow", "/");
   return ref$ = {}, import$(ref$, state), ref$.selectedStation = undefined, ref$;
 };
 toggleStationStar = function(state, id){
@@ -46872,10 +46923,10 @@ module.exports = invariant;
 /* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var connect, ref$, createElement, DOM, AreaChart, XAxis, YAxis, Area, Line, div, a, b, img, h1, strong, linearGradient, defs, stop, icons, mapStateToProps, mapDispatchToProps, header, measurementBox, historyChart, weatherBox, main;
+var connect, ref$, createElement, DOM, ComposedChart, XAxis, YAxis, Area, Line, div, a, b, img, h1, strong, linearGradient, defs, stop, icons, mapStateToProps, mapDispatchToProps, header, measurementBox, historyChart, weatherBox, findSensor, main;
 connect = __webpack_require__(98).connect;
 ref$ = __webpack_require__(2), createElement = ref$.createElement, DOM = ref$.DOM;
-ref$ = __webpack_require__(802), AreaChart = ref$.AreaChart, XAxis = ref$.XAxis, YAxis = ref$.YAxis, Area = ref$.Area, Line = ref$.Line;
+ref$ = __webpack_require__(802), ComposedChart = ref$.ComposedChart, XAxis = ref$.XAxis, YAxis = ref$.YAxis, Area = ref$.Area, Line = ref$.Line;
 div = DOM.div, a = DOM.a, b = DOM.b, img = DOM.img, h1 = DOM.h1, strong = DOM.strong, linearGradient = DOM.linearGradient, defs = DOM.defs, stop = DOM.stop;
 icons = {
   back: __webpack_require__(1098),
@@ -46961,7 +47012,7 @@ measurementBox = function(arg$){
   }) : void 8);
 };
 historyChart = function(arg$){
-  var history, data, res$, i$, len$, h, ref$;
+  var history, data, res$, i$, len$, h, ref$, width;
   history = arg$.history;
   res$ = [];
   for (i$ = 0, len$ = history.length; i$ < len$; ++i$) {
@@ -46969,12 +47020,17 @@ historyChart = function(arg$){
     res$.push((ref$ = {}, import$(ref$, h), ref$.date = +new Date(h.datetime), ref$));
   }
   data = res$;
+  width = (ref$ = document.getElementsByClassName("infobox")[0]) != null ? ref$.offsetWidth : void 8;
   return div({
     className: "history"
-  }, createElement(AreaChart, {
+  }, createElement(ComposedChart, {
     data: data,
-    width: 400,
-    height: 100
+    width: width,
+    height: 100,
+    margin: {
+      left: 0,
+      right: 0
+    }
   }, defs({}, linearGradient({
     id: "gradient",
     x1: "0",
@@ -46989,10 +47045,7 @@ historyChart = function(arg$){
     offset: "90%",
     stopColor: "#82e0f5",
     stopOpacity: 0
-  }))), createElement(Line, {
-    dataKey: "weeklyAverage",
-    stroke: "blue"
-  }), createElement(Area, {
+  }))), createElement(Area, {
     dataKey: "value",
     stroke: "white",
     fillOpacity: 1,
@@ -47010,9 +47063,22 @@ weatherBox = function(arg$){
     className: "small"
   }, indicator))));
 };
+findSensor = function(sensors, sensorName){
+  return sensors.find(function(arg$){
+    var name;
+    name = arg$.name;
+    return name === sensorName;
+  });
+};
 main = function(arg$){
-  var selectedStation, isStarred, onBack, onToggleStar, sensor;
+  var selectedStation, isStarred, onBack, onToggleStar, sensors, res$, i$, ref$, len$, name, sensor;
   selectedStation = arg$.selectedStation, isStarred = arg$.isStarred, onBack = arg$.onBack, onToggleStar = arg$.onToggleStar;
+  res$ = [];
+  for (i$ = 0, len$ = (ref$ = ['discharges', 'temperatures']).length; i$ < len$; ++i$) {
+    name = ref$[i$];
+    res$.push(findSensor(selectedStation.sensors, name));
+  }
+  sensors = res$;
   return div({
     className: "detail"
   }, window.navigator.standalone ? div({
@@ -47026,11 +47092,13 @@ main = function(arg$){
     className: "infos"
   }, (function(){
     var i$, ref$, len$, results$ = [];
-    for (i$ = 0, len$ = (ref$ = selectedStation.sensors).length; i$ < len$; ++i$) {
+    for (i$ = 0, len$ = (ref$ = sensors).length; i$ < len$; ++i$) {
       sensor = ref$[i$];
-      results$.push(div({
-        key: sensor.name
-      }, measurementBox((import$({}, sensor)))));
+      if (sensor != null) {
+        results$.push(div({
+          key: sensor.name
+        }, measurementBox((import$({}, sensor)))));
+      }
     }
     return results$;
   }()), selectedStation.weather ? weatherBox(selectedStation.weather) : void 8, selectedStation.lastSyncDate != null ? div({
@@ -47209,12 +47277,12 @@ main);
 /* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ref$, createElement, DOM, createStore, applyMiddleware, render, Provider, createEpicMiddleware, combineEpics, reducer, epic, ui, epicMiddleware, store, app, backendUrl;
-ref$ = __webpack_require__(2), createElement = ref$.createElement, DOM = ref$.DOM;
+var createElement, ref$, createStore, applyMiddleware, render, Provider, createEpicMiddleware, reducer, epic, ui, epicMiddleware, store, app;
+createElement = __webpack_require__(2).createElement;
 ref$ = __webpack_require__(211), createStore = ref$.createStore, applyMiddleware = ref$.applyMiddleware;
 render = __webpack_require__(209).render;
 Provider = __webpack_require__(98).Provider;
-ref$ = __webpack_require__(210), createEpicMiddleware = ref$.createEpicMiddleware, combineEpics = ref$.combineEpics;
+createEpicMiddleware = __webpack_require__(210).createEpicMiddleware;
 reducer = __webpack_require__(386);
 epic = __webpack_require__(385);
 ui = __webpack_require__(384);
@@ -47224,27 +47292,11 @@ app = createElement(Provider, {
   store: store
 }, createElement(ui, {}));
 render(app, document.getElementById('agua'));
-backendUrl = "https://waterbuddy.herokuapp.com/api";
-fetch(backendUrl + "/stations").then(function(resp){
-  return resp.json();
-}).then(function(stations){
-  return store.dispatch({
-    type: 'STATIONS_LOADED',
-    stations: stations
-  });
-});
-fetch(backendUrl + "/measurements").then(function(resp){
-  return resp.json();
-}).then(function(measurements){
-  return store.dispatch({
-    type: 'MEASUREMENTS_LOADED',
-    measurements: measurements
-  });
+store.dispatch({
+  type: 'APP_LOADED'
 });
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register("./service-worker.js").then(function(){
-    return console.log("Service Worker Registered");
-  });
+  navigator.serviceWorker.register("./service-worker.js");
 }
 //# sourceMappingURL=/Users/flo/Projects/agua/node_modules/livescript-loader/index.js!/Users/flo/Projects/agua/app/index.ls.map
 
