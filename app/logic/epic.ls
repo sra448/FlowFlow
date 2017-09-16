@@ -5,6 +5,19 @@
 backend-url = "https://waterbuddy.herokuapp.com/api"
 
 
+back-button-triggered = (action$) ->
+  action$
+    .of-type \APP_LOADED
+    .switch-map ->
+      register = (h) -> window.onpopstate = h
+      unregister = -> window.onpopstate = undefined
+      Observable
+        .from-event-pattern register, unregister
+        .map ({ state }) ->
+          { type: \STATION_UNSELECTED }
+
+
+
 fetch-weather = (action$) ->
   action$
     .of-type \STATION_SELECTED
@@ -29,4 +42,4 @@ fetch-history = (action$) ->
           { type: \STATION_HISTORY_LOADED, history: response }
 
 
-module.exports = combine-epics fetch-weather, fetch-history
+module.exports = combine-epics back-button-triggered, fetch-weather, fetch-history

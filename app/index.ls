@@ -17,6 +17,9 @@ app = create-element Provider, { store }, (create-element ui, {})
 
 render app, document.get-element-by-id \agua
 
+# kick off things
+store.dispatch { type: \APP_LOADED }
+
 
 # load data
 # TODO: maybe find a better place for this in an epic?

@@ -49,13 +49,14 @@ reset-search-results = (state) ->
 
 
 reset-current-station-data = (state) ->
-  if state.selected-station
-    set-current-station-data state, state.selected-station.id
-  else
+  if !state.selected-station
     state
+  else
+    set-current-station-data state, state.selected-station.id
 
 
 set-current-station-data = (state, id) ->
+  history.push-state {}, id, "\#station/#{id}"
   { ...state, selected-station: enhanced-station-data state, id }
 
 
@@ -87,6 +88,7 @@ station-history-loaded = (state, history) ->
 
 
 unselect-station = (state) ->
+  history.replace-state {}, "FlowFlow", "/"
   { ...state, selected-station: undefined }
 
 
