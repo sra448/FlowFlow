@@ -88,13 +88,19 @@ weather-box = ({ air-temp, indicator }) ->
 # Main Component
 
 
+find-sensor = (sensors, sensor-name) ->
+  sensors.find ({ name }) -> name == sensor-name
+
+
 main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
+  sensors = [find-sensor selected-station.sensors, name for name in [\discharges, \temperatures]]
+
   div { class-name: "detail" },
     div { class-name: "spacer" } if window.navigator.standalone
     header { selected-station, on-back, on-toggle-star, is-starred }
 
     div { class-name: "infos" },
-      for sensor in selected-station.sensors
+      for sensor in sensors when sensor?
         div { key: sensor.name },
           measurement-box { ...sensor }
 
