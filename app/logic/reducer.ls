@@ -76,6 +76,12 @@ enhanced-station-data = (state, id) ->
   { ...station, last-sync-date, sensors, weather: undefined }
 
 
+expand-sensor = (state, name) ->
+  sensors = do
+    [(if sensor.name != name then sensor else { ...sensor, expanded: true }) for sensor in state.selected-station.sensors]
+  { ...state, selected-station: { ...state.selected-station, sensors } }
+
+
 station-history-loaded = (state, history) ->
   if !state.selected-station?
     state
@@ -166,6 +172,9 @@ module.exports = (state = initial-state, action) ->
     case \STATION_STAR_TOGGLED
       toggle-station-star state, action.id
         |> persist-starred-station-ids
+
+    case \SENSOR_EXPANDED
+      expand-sensor state, action.name
 
     default
       state
