@@ -94,6 +94,7 @@ find-sensor = (sensors, sensor-name) ->
 
 main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
   sensors = [find-sensor selected-station.sensors, name for name in [\discharges, \temperatures]]
+  weather-sensor = find-sensor selected-station.sensors, \weather
 
   div { class-name: "detail" },
     div { class-name: "spacer" } if window.navigator.standalone
@@ -104,8 +105,8 @@ main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
         div { key: sensor.name },
           measurement-box { ...sensor }
 
-      if selected-station.weather
-        weather-box selected-station.weather
+      if weather-sensor?
+        weather-box weather-sensor.current
 
       if selected-station.last-sync-date?
         div { class-name: "small" },

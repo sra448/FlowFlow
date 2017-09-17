@@ -65,6 +65,7 @@ enhanced-station-data = (state, id) ->
     Discharge: \discharges
     SeaLevel: \sea-levels
     Temperature: \temperatures
+    Weather: \weather
 
   station = find-station state.stations, id
   measurements = state.measurements[id] || []
@@ -73,10 +74,6 @@ enhanced-station-data = (state, id) ->
     [{ name:measure-type-map[m.measurement-type], unit: m.unit, current: m } for m in measurements]
 
   { ...station, last-sync-date, sensors, weather: undefined }
-
-
-station-weather-loaded = (state, weather) ->
-  { ...state, selected-station: { ...state.selected-station, weather } }
 
 
 station-history-loaded = (state, history) ->
@@ -159,9 +156,6 @@ module.exports = (state = initial-state, action) ->
 
     case \STATION_SELECTED
       set-current-station-data state, action.id
-
-    case \STATION_WEATHER_LOADED
-      station-weather-loaded state, action.weather
 
     case \STATION_HISTORY_LOADED
       station-history-loaded state, action.history
