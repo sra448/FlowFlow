@@ -63,16 +63,16 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 546);
+/******/ 	return __webpack_require__(__webpack_require__.s = 544);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 546:
+/***/ 544:
 /***/ (function(module, exports) {
 
 var PRECACHE, RUNTIME, PRECACHE_URLS;
-PRECACHE = 'flowflow-v1.0.14';
+PRECACHE = 'flowflow-v1.0.15';
 RUNTIME = "prod";
 PRECACHE_URLS = ["index.html", "index.js", "https://fonts.googleapis.com/css?family=Lobster+Two:400,700i"];
 self.addEventListener("install", function(event){
@@ -116,7 +116,7 @@ self.addEventListener('fetch', function(event){
     }
   }));
 });
-//# sourceMappingURL=/Users/flo/Projects/agua/node_modules/livescript-loader/index.js!/Users/flo/Projects/agua/app/service-worker.ls.map
+//# sourceMappingURL=/Users/flo/Projects/FlowFlow/node_modules/livescript-loader/index.js!/Users/flo/Projects/FlowFlow/app/service-worker.ls.map
 
 
 /***/ })
