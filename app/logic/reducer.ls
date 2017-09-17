@@ -65,6 +65,7 @@ enhanced-station-data = (state, id) ->
     Discharge: \discharges
     SeaLevel: \sea-levels
     Temperature: \temperatures
+    Weather: \weather
 
   station = find-station state.stations, id
   measurements = state.measurements[id] || []
@@ -75,8 +76,10 @@ enhanced-station-data = (state, id) ->
   { ...station, last-sync-date, sensors, weather: undefined }
 
 
-station-weather-loaded = (state, weather) ->
-  { ...state, selected-station: { ...state.selected-station, weather } }
+expand-sensor = (state, name) ->
+  sensors = do
+    [(if sensor.name != name then sensor else { ...sensor, expanded: true }) for sensor in state.selected-station.sensors]
+  { ...state, selected-station: { ...state.selected-station, sensors } }
 
 
 station-history-loaded = (state, history) ->
@@ -160,9 +163,6 @@ module.exports = (state = initial-state, action) ->
     case \STATION_SELECTED
       set-current-station-data state, action.id
 
-    case \STATION_WEATHER_LOADED
-      station-weather-loaded state, action.weather
-
     case \STATION_HISTORY_LOADED
       station-history-loaded state, action.history
 
@@ -172,6 +172,9 @@ module.exports = (state = initial-state, action) ->
     case \STATION_STAR_TOGGLED
       toggle-station-star state, action.id
         |> persist-starred-station-ids
+
+    case \SENSOR_EXPANDED
+      expand-sensor state, action.name
 
     default
       state

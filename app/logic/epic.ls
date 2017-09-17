@@ -40,14 +40,6 @@ back-button-triggered = (action$) ->
           { type: \STATION_UNSELECTED }
 
 
-fetch-weather = (action$) ->
-  action$
-    .of-type \STATION_SELECTED
-    .switch-map ({ id }) -> get "station/#{id}/weather"
-    .map ({ response }) ->
-      { type: \STATION_WEATHER_LOADED, weather: response }
-
-
 fetch-history = (action$) ->
   action$
     .of-type \STATION_SELECTED
@@ -59,7 +51,6 @@ fetch-history = (action$) ->
 module.exports = do
   combine-epics do
     back-button-triggered,
-    fetch-weather,
     fetch-history,
     fetch-stations,
     fetch-measurements

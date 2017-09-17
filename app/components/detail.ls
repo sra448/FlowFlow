@@ -33,6 +33,8 @@ map-dispatch-to-props = (dispatch) ->
     dispatch { type: \STATION_UNSELECTED }
   on-toggle-star: (id) -> ->
     dispatch { type: \STATION_STAR_TOGGLED, id }
+  on-expand-sensor: (name) -> ->
+    dispatch { type: \SENSOR_EXPANDED, name }
 
 
 
@@ -50,7 +52,17 @@ header = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
       img { src: if is-starred then icons.star else icons.star-empty }
 
 
-measurement-box = ({ name, current, unit, history }) ->
+measurement-box = ({ name, current, unit, history, on-click }) ->
+  div { on-click, class-name: "infobox" },
+    div { class-name: "current" },
+      b {}, current.value
+      div {},
+        img { src: icons.type[name] }
+        div { class-name: "small" }, name
+        div {}, unit
+
+
+measurement-box-enhanced = ({ name, current, unit, history }) ->
   div { class-name: "infobox" },
     div { class-name: "current" },
       b {}, current.value
@@ -92,8 +104,9 @@ find-sensor = (sensors, sensor-name) ->
   sensors.find ({ name }) -> name == sensor-name
 
 
-main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
+main = ({ selected-station, is-starred, on-back, on-toggle-star, on-expand-sensor }) ->
   sensors = [find-sensor selected-station.sensors, name for name in [\discharges, \temperatures]]
+  weather-sensor = find-sensor selected-station.sensors, \weather
 
   div { class-name: "detail" },
     div { class-name: "spacer" } if window.navigator.standalone
@@ -102,10 +115,13 @@ main = ({ selected-station, is-starred, on-back, on-toggle-star }) ->
     div { class-name: "infos" },
       for sensor in sensors when sensor?
         div { key: sensor.name },
-          measurement-box { ...sensor }
+          if sensor.expanded
+            measurement-box-enhanced { ...sensor }
+          else
+            measurement-box { ...sensor, on-click: on-expand-sensor sensor.name }
 
-      if selected-station.weather
-        weather-box selected-station.weather
+      if weather-sensor?
+        weather-box weather-sensor.current
 
       if selected-station.last-sync-date?
         div { class-name: "small" },
