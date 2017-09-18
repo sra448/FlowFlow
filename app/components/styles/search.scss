@@ -34,13 +34,14 @@
     position: relative;
     padding: 0 20px;
     transition: all .3s ease-out;
+    text-align: left;
 
     div {
       padding: 0 10px;
     }
 
     input {
-      width: 100%;
+      width: 80%;
       background: none;
       border: none;
       line-height: 33px;
