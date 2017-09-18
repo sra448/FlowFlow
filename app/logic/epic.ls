@@ -48,9 +48,28 @@ fetch-history = (action$) ->
       { type: \STATION_HISTORY_LOADED, history: response }
 
 
+flash-message-star-station = (action$, store) ->
+  action$
+    .of-type \STATION_STAR_TOGGLED
+    .switch-map ->
+      { selected-station, starred-stations } = store.get-state()
+
+      message = if selected-station.id in [id for { id } in starred-stations]
+        "added to favourites"
+      else
+        "removed from favourites"
+
+      Observable.merge do
+        (Observable.of { type: \FLASH_MESSAGE_SET, message }),
+        ((Observable.of { type: \FLASH_MESSAGE_SHOW }).delay 100),
+        ((Observable.of { type: \FLASH_MESSAGE_HIDE }).delay 800),
+        (Observable.of { type: \FLASH_MESSAGE_UNSET }).delay 900
+
+
 module.exports = do
   combine-epics do
     back-button-triggered,
     fetch-history,
     fetch-stations,
-    fetch-measurements
+    fetch-measurements,
+    flash-message-star-station

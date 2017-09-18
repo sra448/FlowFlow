@@ -52,3 +52,24 @@ h1 {
 .spacer {
   height: 20px;
 }
+
+.flash {
+  position: absolute;
+  top: 80px;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .1s ease-in;
+
+  &.visible {
+    opacity: 1;
+    z-index: 999;
+  }
+
+  > span {
+    background: rgba(78, 214, 245, 0.36);
+    padding: 10px 20px;
+    border-radius: 30px;
+  }
+
+}

@@ -122,6 +122,22 @@ reset-starred-stations-data = (state) ->
   { ...state, starred-stations: [enhanced-station-data state, id for id in ids || []] }
 
 
+set-flash-message = (state, flash-message) ->
+  { ...state, flash-message, flash-show: false }
+
+
+show-flash-message = (state) ->
+  { ...state, flash-show: true }
+
+
+hide-flash-message = (state, flash-message) ->
+  { ...state, flash-show: false }
+
+
+unset-flash-message = (state) ->
+  { ...state, flash-message: undefined }
+
+
 
 # Reducer
 
@@ -134,6 +150,8 @@ initial-state = do
   search-results: []
   selected-station: undefined
   starred-stations: []
+  flash-show: false
+  flash-message: undefined
 
 
 module.exports = (state = initial-state, action) ->
@@ -175,6 +193,18 @@ module.exports = (state = initial-state, action) ->
 
     case \SENSOR_EXPANDED
       expand-sensor state, action.name
+
+    case \FLASH_MESSAGE_SET
+      set-flash-message state, action.message
+
+    case \FLASH_MESSAGE_SHOW
+      show-flash-message state, action.message
+
+    case \FLASH_MESSAGE_HIDE
+      hide-flash-message state, action.message
+
+    case \FLASH_MESSAGE_UNSET
+      unset-flash-message state
 
     default
       state
