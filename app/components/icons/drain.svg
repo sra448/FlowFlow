@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="14px" height="15px" viewBox="0 0 14 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
-    <title>Page 1</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Styles" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="iPhone-7-Copy-5" transform="translate(-240.000000, -159.000000)" stroke="#FFFFFF" stroke-width="2">
-            <g id="Page-1" transform="translate(247.267767, 166.767767) rotate(-45.000000) translate(-247.267767, -166.767767) translate(241.267767, 157.767767)">
-                <polyline id="Stroke-1" points="12 11 6 17.001 0 11"></polyline>
-                <path d="M6,17 L6,0.48959236" id="Stroke-3"></path>
-            </g>
-        </g>
+  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(-240.000000, -159.000000)" stroke="#FFFFFF" stroke-width="2">
+      <g transform="translate(247.267767, 166.767767) rotate(-45.000000) translate(-247.267767, -166.767767) translate(241.267767, 157.767767)">
+        <polyline points="12 11 6 17.001 0 11"></polyline>
+        <path d="M6,17 L6,0.48959236"></path>
+      </g>
     </g>
+  </g>
 </svg>
