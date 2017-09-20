@@ -7,6 +7,18 @@ search-icon = require "./icons/search.svg"
 x-icon = require "./icons/x.svg"
 
 
+icons =
+  star: require "./icons/star.svg"
+  type:
+    discharges: require "./icons/drain.svg"
+    sealevels: require "./icons/level.svg"
+    temperatures: require "./icons/temperatur.svg"
+    sun: require "./icons/sun.svg"
+    sun_cloud: require "./icons/cloud-sun.svg"
+    cloud: require "./icons/cloud.svg"
+    rain: require "./icons/rain.svg"
+
+
 
 # React Redux Bindings
 
@@ -61,12 +73,37 @@ result-list = ({ search-results, on-select-station }) ->
         "#{water-body-name}, #{name}"
 
 
-
 starred-stations-list = ({ starred-stations, on-select-station }) ->
   div { class-name: "starred-stations" },
-    for { id, water-body-name, name } in starred-stations
-      div { key: name, on-click: on-select-station id },
-        "#{water-body-name}, #{name}"
+    for station in starred-stations
+      starred-station { ...station, on-select-station }
+
+
+starred-station = ({ id, water-body-name, name, sensors, on-select-station }) ->
+  relevant-sensors = [find-sensor sensors, type for type in [\discharges, \temperatures]]
+  weather-sensor = find-sensor sensors, \weather
+
+  div { key: name, on-click: on-select-station id },
+
+    div {},
+      div {}, "#{water-body-name}, #{name}"
+
+    div {},
+      for sensor in relevant-sensors when sensor?
+        sensor-indicator { name: sensor.name, value: sensor.current.value }
+
+      if weather-sensor?
+        sensor-indicator { name: weather-sensor.current.indicator, value: weather-sensor.current.air-temp }
+
+
+sensor-indicator = ({ name, value }) ->
+  div { key: name },
+    div {}, value
+    img { src: icons.type[name] }
+
+
+find-sensor = (sensors = [], sensor-name) ->
+  sensors.find ({ name }) -> name == sensor-name
 
 
 

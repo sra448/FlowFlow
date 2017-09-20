@@ -71,7 +71,7 @@ enhanced-station-data = (state, id) ->
   measurements = state.measurements[id] || []
   last-sync-date = new Date measurements[0]? && new Date measurements[0].datetime
   sensors = do
-    [{ name:measure-type-map[m.measurement-type], unit: m.unit, current: m } for m in measurements]
+    [{ name: measure-type-map[m.measurement-type], unit: m.unit, current: m } for m in measurements]
 
   { ...station, last-sync-date, sensors, weather: undefined }
 
@@ -162,6 +162,7 @@ module.exports = (state = initial-state, action) ->
     case \STATIONS_LOADED
       reset-stations state, action.stations
         |> reset-search-results
+        |> reset-starred-stations-data
 
     case \MEASUREMENTS_LOADED
       reset-measurements state, action.measurements
@@ -190,6 +191,7 @@ module.exports = (state = initial-state, action) ->
     case \STATION_STAR_TOGGLED
       toggle-station-star state, action.id
         |> persist-starred-station-ids
+        |> reset-starred-stations-data
 
     case \SENSOR_EXPANDED
       expand-sensor state, action.name

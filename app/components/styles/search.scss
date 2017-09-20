@@ -25,8 +25,26 @@
     margin-top: 20px;
 
     > div {
-      padding: 6px 0;
+      padding: 10px 0;
       cursor: pointer;
+
+      img {
+        height: 16px;
+      }
+
+      div {
+        padding: 0 5px;
+        align-items: center;
+      }
+
+      > div:nth-child(2) {
+        > div {
+          display: inline-block;
+          > div {
+            display: inline-block;
+          }
+        }
+      }
     }
   }
 
