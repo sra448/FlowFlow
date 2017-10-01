@@ -1,5 +1,6 @@
 node_modules
 index.js
+server.js
 service-worker.js
 .DS_Store
 package-lock.json
