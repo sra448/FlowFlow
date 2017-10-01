@@ -117,7 +117,7 @@ main = (props) ->
   class-name = "search #{"condensed" if show-as-condensed}"
 
   div { class-name },
-    div { class-name: "spacer" } if window.navigator.standalone
+    # div { class-name: "spacer" } if window.navigator.standalone
     h1 {}, \FlowFlow
     search-box { value: search-text, on-focus, on-change, on-blur, on-clear }
     wave {}

@@ -1,11 +1,26 @@
-module.exports = {
+module.exports = [{
   entry: {
-    "index": "./app/index.ls",
-    "service-worker": "./app/service-worker.ls",
+    "server": "./server/server.ls"
   },
   output: {
     path: __dirname,
-    filename: "app/[name].js"
+    filename: "server/[name].js"
+  },
+  target: "node",
+  module: {
+    loaders: [
+      { test: /\.ls$/, loader: "livescript-loader" },
+      { test: /\.svg$/, loader: "url-loader" },
+      { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"] }
+    ]
+  }
+}, {
+  entry: {
+    "index": "./app/index.ls"
+  },
+  output: {
+    path: __dirname,
+    filename: "server/bin/[name].js"
   },
   module: {
     loaders: [
@@ -14,4 +29,4 @@ module.exports = {
       { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"] }
     ]
   }
-}
+}]

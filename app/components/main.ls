@@ -10,9 +10,9 @@ detail-ui = require "./detail.ls"
 # Styles
 
 
-require "./styles/base.scss"
-require "./styles/search.scss"
-require "./styles/detail.scss"
+# require "./styles/base.scss"
+# require "./styles/search.scss"
+# require "./styles/detail.scss"
 
 
 

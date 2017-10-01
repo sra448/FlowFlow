@@ -109,7 +109,7 @@ main = ({ selected-station, is-starred, on-back, on-toggle-star, on-expand-senso
   weather-sensor = find-sensor selected-station.sensors, \weather
 
   div { class-name: "detail" },
-    div { class-name: "spacer" } if window.navigator.standalone
+    # div { class-name: "spacer" } if window.navigator.standalone
     header { selected-station, on-back, on-toggle-star, is-starred }
 
     div { class-name: "infos" },
