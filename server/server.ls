@@ -7,7 +7,7 @@ port = Number process.env.PORT || 8000
 server = (require \http).Server api
 
 
-api.use express.static "server/bin"
+api.use express.static "server/public"
 
 
 api.get "/", (req, res) ->

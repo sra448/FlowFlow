@@ -21,7 +21,7 @@ module.exports = [{
   },
   output: {
     path: __dirname,
-    filename: "server/bin/[name].js"
+    filename: "server/public/[name].js"
   },
   module: {
     loaders: [
