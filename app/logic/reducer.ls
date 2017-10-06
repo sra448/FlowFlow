@@ -23,7 +23,7 @@ reset-stations = (state, stations) ->
 
 
 find-station = (stations, id) ->
-  stations.find (s) -> s.id == id
+  stations.find (s) -> s.id == +id
 
 
 reset-measurements = (state, measurements) ->
@@ -44,7 +44,7 @@ change-search-text = (state, search-text) ->
 
 reset-search-results = (state) ->
   ids = stations-searcher.search state.search-text
-  search-results = state.stations.filter (s) -> s.id in ids
+  search-results = [find-station state.stations, id for id in ids]
   { ...state, search-results }
 
 

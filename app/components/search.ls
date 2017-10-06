@@ -1,7 +1,7 @@
 { repeat } = require \prelude-ls
 { connect } = require \react-redux
-{ create-element, DOM } = require \react
-{ div, h1, input, ul, li, img, svg, path, strong } = DOM
+{ create-element } = require \react
+{ div, h1, input, ul, li, img, svg, path, strong } = require \react-dom-factories
 
 search-icon = require "./icons/search.svg"
 x-icon = require "./icons/x.svg"

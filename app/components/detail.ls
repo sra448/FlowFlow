@@ -1,7 +1,7 @@
 { connect } = require \react-redux
-{ create-element, DOM } = require \react
+{ create-element } = require \react
 { ComposedChart, XAxis, YAxis, Area, Line } = require \recharts
-{ div, a, b, img, h1, strong, linear-gradient, defs, stop } = DOM
+{ div, a, b, img, h1, strong, linear-gradient, defs, stop } = require \react-dom-factories
 
 
 icons =

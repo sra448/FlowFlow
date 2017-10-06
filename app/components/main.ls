@@ -1,6 +1,6 @@
 { connect } = require \react-redux
-{ create-element, DOM } = require \react
-{ div, span } = DOM
+{ create-element } = require \react
+{ div, span } = require \react-dom-factories
 
 search-ui = require "./search.ls"
 detail-ui = require "./detail.ls"
